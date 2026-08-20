@@ -64,8 +64,24 @@
     "revision": "fc4bf089db20e62cda42627c010af2d1f5e64ea2"
   },
   {
-    "url": "/literature/fra-contadini.html",
+    "url": "/literature/fra-contadini/index.html",
     "revision": "788688c3c1ef8d29cafca2d715c7535507d93868"
+  },
+  {
+    "url": "/literature/mother-earth-vol-1-no-2-april-1906/index.html",
+    "revision": "9ee1eda3f4758d61da107cabdd2595e93bd2406a"
+  },
+  {
+    "url": "/literature/mother-earth-vol-1-no-3-may-1906/index.html",
+    "revision": "e80f50df6f03f4ad9610f4074df4d3d0654b370e"
+  },
+  {
+    "url": "/literature/mother-earth-vol-1-no-4-june-1906/index.html",
+    "revision": "84b56c19e4a61fe3ada8ca5e7f08f81a0389b253"
+  },
+  {
+    "url": "/literature/the-right-to-ignore-the-state/index.html",
+    "revision": "9b56dea24d758bd534959c33d049250b70c0a793"
   },
   {
     "url": "/manifest.webmanifest",
