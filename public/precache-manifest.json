@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "url": "/css/style.css",
+    "revision": "3f2dbbb330042e0fdb66fb73bd4a35712b83ac7c"
+  },
+  {
+    "url": "/index.html",
+    "revision": "306fab61033858bc267f5b9143111d52f071f754"
+  },
+  {
+    "url": "/js/app.js",
+    "revision": "fc4bf089db20e62cda42627c010af2d1f5e64ea2"
+  },
+  {
+    "url": "/manifest.webmanifest",
+    "revision": "c35381793269e1d010cc91bb333e6467f32b29b0"
+  },
+  {
+    "url": "/sw-register.js",
+    "revision": "e3872853a5ab3e2eed5247d06ca7e6c5dfe306e3"
+  },
+  {
+    "url": "/sw.js",
+    "revision": "dd2fb67ac0205a5e1549c3b493d29656dc35c4b9"
+  }
+]
