@@ -65,7 +65,7 @@ async function sha1File(filePath) {
       console.log(`  → Found ${files.length} file(s)`);
     }
 
-    const rootFiles = ['index.html', 'manifest.webmanifest', 'sw.js', 'sw-register.js'];
+    const rootFiles = ['index.html', 'manifest.webmanifest', 'sw.js', 'sw-register.js', '_headers'];
     for (const name of rootFiles) {
       const filePath = join(PUBLIC_DIR, name);
       try {
