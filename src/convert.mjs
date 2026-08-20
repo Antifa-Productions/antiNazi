@@ -171,11 +171,14 @@ async function convertFile(inputPath) {
   console.log(`Converting: ${inputPath}`);
   const book = await parseTextFile(inputPath);
 
-  if (!existsSync(OUTPUT_DIR)) {
-    await mkdir(OUTPUT_DIR, { recursive: true });
+  // NEW: Create book-specific subdirectory instead of flat file
+  const outputDir = join(OUTPUT_DIR, book.fileName);
+  if (!existsSync(outputDir)) {
+    await mkdir(outputDir, { recursive: true });
   }
 
-  const outputFile = join(OUTPUT_DIR, `${book.fileName}.html`);
+  // NEW: Write index.html inside the subdirectory
+  const outputFile = join(outputDir, 'index.html');
   const html = buildHtml(book);
   await writeFile(outputFile, html, 'utf-8');
   console.log(`  → Written: ${outputFile}`);
