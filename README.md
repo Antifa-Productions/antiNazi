@@ -169,7 +169,7 @@ If Gutenberg markers are absent, the converter degrades gracefully — it proces
 
 ## License
 
-Source code: [Unlicense](https://unlicense.org/) (public domain).
+Source code: [GNU Affero General Public License v3.0 or later](https://spdx.org/licenses/AGPL-3.0-or-later.html)(note all literature is public domain).
 
 Literature texts: Public domain (sourced from [Project Gutenberg](https://www.gutenberg.org/)).
 
