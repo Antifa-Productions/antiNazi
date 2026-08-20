@@ -1,0 +1,61 @@
+name: Hash Precache Manifest
+
+on:
+  push:
+    paths:
+      - 'public/Archive/**'
+      - 'public/css/**'
+      - 'public/js/**'
+      - 'public/literature/**'
+      - 'public/images/**'
+      - 'public/index.html'
+      - 'public/sw.js'
+      - 'public/sw-register.js'
+      - 'public/manifest.webmanifest'
+      - 'src/hash-files.mjs'
+    branches:
+      - main
+  workflow_run:
+    workflows: ["Convert Literature"]
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hash:
+    name: Generate SHA1 precache manifest
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then npm ci || true; fi
+
+      - name: Run hasher
+        run: node src/hash-files.mjs
+
+      - name: Commit manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/precache-manifest.json
+          if git diff --cached --quiet; then
+            echo "No manifest changes to commit."
+          else
+            git commit -m "chore: update precache manifest [auto]"
+            git push
+          fi
