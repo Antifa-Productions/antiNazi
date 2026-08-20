@@ -160,7 +160,7 @@ If Gutenberg markers are absent, the converter degrades gracefully — it proces
 
 ## Tech Stack
 
-- **Runtime**: Node.js 18+ (ESM)
+- **Runtime**: Node.js 20+ (ESM)
 - **CI**: GitHub Actions (Ubuntu, Node 20)
 - **PWA**: Vanilla service worker, no Workbox dependency
 - **CSS**: Custom properties, `clamp()` typography, `prefers-color-scheme: dark`
