@@ -15,10 +15,10 @@
       "purpose": "any"
     },
     {
-      "src": "/images/png/icon-512.png",
+      "src": "/images/png/icon-512x512-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ]
 }
