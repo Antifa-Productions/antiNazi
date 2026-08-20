@@ -1,0 +1,98 @@
+import { escapeHtml } from './utils.mjs';
+
+export function buildHtml(book, cssPath = '/css/style.css') {
+  const lang = book.language || 'en';
+  const datePublished = book.datePublished || '';
+  const description = book.description || '';
+
+  const chaptersHtml = book.chapters.map(ch => {
+    const paras = ch.paragraphs.map(p => `      <p>${p}</p>`).join('\n');
+    return `    <section aria-labelledby="${ch.id}">
+      <h2 id="${ch.id}">${escapeHtml(ch.heading)}</h2>
+${paras}
+    </section>`;
+  }).join('\n');
+
+  let footnotesHtml = '';
+  if (book.footnotes && book.footnotes.length > 0) {
+    const items = book.footnotes.map(fn =>
+      `      <li id="${fn.id}"><a href="#ref-${fn.num}" aria-label="Back to reference ${fn.num}">↩</a> ${fn.text}</li>`
+    ).join('\n');
+    footnotesHtml = `
+    <section aria-labelledby="footnotes-heading">
+      <h2 id="footnotes-heading">Footnotes</h2>
+      <ol class="footnotes">
+${items}
+      </ol>
+    </section>`;
+  }
+
+  const schemaLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: book.title,
+    author: { '@type': 'Person', name: book.author },
+    inLanguage: lang,
+  };
+  if (datePublished) schemaLd.datePublished = datePublished;
+  if (description) schemaLd.description = description;
+
+  return `<!DOCTYPE html>
+<html lang="${lang}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#54428e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181424" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="${escapeHtml(description || `${book.title} by ${book.author}`)}">
+  <meta property="og:title" content="${escapeHtml(book.title)}">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="${lang}">
+  <link rel="stylesheet" href="${cssPath}">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <title>${escapeHtml(book.title)} — ${escapeHtml(book.author)}</title>
+  <script type="application/ld+json">
+${JSON.stringify(schemaLd, null, 2)}
+  </script>
+  <script src="/sw-register.js" defer></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header>
+    <nav aria-label="Breadcrumb">
+      <ul class="breadcrumbs">
+        <li><a href="/" aria-label="Home">🏠</a></li>
+        <li><a href="/library/" aria-label="Library">📚 Library</a></li>
+        <li aria-current="page">${escapeHtml(book.title)}</li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main-content">
+    <article>
+      <header>
+        <h1>${escapeHtml(book.title)}</h1>
+        <p class="byline">by <span class="author">${escapeHtml(book.author)}</span></p>
+${datePublished ? `        <p class="pub-date">First published: <time datetime="${escapeHtml(datePublished)}">${escapeHtml(datePublished)}</time></p>` : ''}
+      </header>
+${chaptersHtml}
+${footnotesHtml}
+    </article>
+  </main>
+  <footer>
+    <hr>
+    <p class="site-tagline">Defending truth through literature.</p>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/About">About</a></li>
+        <li><a href="/Privacy-Policy">Privacy Policy</a></li>
+        <li><a href="/Accessibility-Statement">Accessibility Statement</a></li>
+        <li><a href="/Terms-of-Service">Terms of Service</a></li>
+        <li><a href="/Gutenberg-License">Project Gutenberg License</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>
+`;
+}
