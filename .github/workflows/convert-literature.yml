@@ -34,6 +34,9 @@ jobs:
       - name: Convert literature
         run: node src/convert.mjs --all
 
+      - name: Build literature index
+        run: node src/build-index.mjs
+
       - name: Commit converted files
         run: |
           git config user.name "github-actions[bot]"
