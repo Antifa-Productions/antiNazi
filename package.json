@@ -1,0 +1,16 @@
+{
+  "name": "literature-pwa",
+  "version": "1.0.0",
+  "description": "Converts plain-text literature into accessible HTML5 and serves as an offline-capable PWA.",
+  "type": "module",
+  "scripts": {
+    "convert": "node src/convert.mjs",
+    "convert:all": "node src/convert.mjs --all",
+    "hash": "node src/hash-files.mjs",
+    "build": "node src/convert.mjs --all && node src/hash-files.mjs"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "AGPL-3.0"
+}
