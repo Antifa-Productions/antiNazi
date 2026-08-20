@@ -3,6 +3,7 @@ name: Hash Precache Manifest
 on:
   push:
     paths:
+      - 'public/_headers'
       - 'public/Archive/**'
       - 'public/css/**'
       - 'public/js/**'
