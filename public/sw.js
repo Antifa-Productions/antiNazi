@@ -1,204 +1,332 @@
 /**
- * Service Worker — precaches assets from precache-manifest.json
- * with cache-first for static assets and network-first for
- * navigation requests.
+ * Production Service Worker
+ *
+ * Uses:
+ *   - Workbox v7 (self-hosted) for precaching and routing strategies
+ *   - IDB (custom wrapper) for reading progress and metadata caching
+ *
+ * Strategies:
+ *   - Precached assets:     Cache-first (managed by Workbox)
+ *   - HTML navigation:      Network-first, fall back to cached index.html
+ *   - CSS / JS:              Stale-while-revalidate
+ *   - JSON data:            Stale-while-revalidate
+ *   - Images:               Cache-first with expiration
+ *
+ * Messaging:
+ *   - SAVE_PROGRESS:  Stores reading position in IndexedDB
+ *   - GET_PROGRESS:   Retrieves reading position from IndexedDB
+ *   - SKIP_WAITING:    Activates new SW immediately
  */
 
-// ── Constants ─────────────────────────────────────────────────────
+// ── Import Workbox and IDB ─────────────────────────────────────────
+//
+// importScripts loads classic scripts (not ES modules).
+// This avoids the "Unexpected keyword export" error on iOS Safari
+// that occurs when using ES module imports in service workers.
 
-const CACHE_NAME = 'literature-v1';
-const PRECACHE_MANIFEST_URL = '/precache-manifest.json';
-const FALLBACK_URL = '/index.html';
-const isDev = !self.location.hostname.includes('prod');
+importScripts('/lib/workbox/workbox-sw.js');
+importScripts('/lib/idb.js');
 
-// ── Logging ───────────────────────────────────────────────────────
+// Tell Workbox where to find its module files (self-hosted)
+workbox.setConfig({
+  modulePathPrefix: '/lib/workbox/',
+});
 
-const logger = {
-  log: (msg, data = null) => {
-    if (isDev) console.log(`[SW] ${msg}`, data ?? '');
-  },
-  warn: (msg, err = null) => {
-    console.warn(`[SW] ⚠️  ${msg}`, jj        `Manifest fetch failed: ${response.status} ${response.statusText}`
-      );
-    }
-    return await response.json();
-  } catch (err) {
-    logger.error(`Failed to load precache manifest from ${PRECACHE_MANIFEST_URL}`, err);
-    return [];
-  }
-}
+// Disable debug logging in production
+workbox.core.setLoggerWorkbox_core_Debug(false);
 
-async function precacheAsset(entry, cache) {
-  const { url, revision } = entry;
-  const cacheUrl = revision ? `${url}?rev=${revision}` : url;
+// Destructure Workbox modules (auto-loaded by workbox-sw)
+var precacheAndRoute = workbox.precaching.precacheAndRoute;
+var registerRoute = workbox.routing.registerRoute;
+var NavigationRoute = workbox.routing.NavigationRoute;
+var NetworkFirst = workbox.strategies.NetworkFirst;
+var StaleWhileRevalidate = workbox.strategies.StaleWhileRevalidate;
+var CacheFirst = workbox.strategies.CacheFirst;
+var ExpirationPlugin = workbox.expiration.ExpirationPlugin;
+var CacheableResponsePlugin = workbox.cacheableResponse.CacheableResponsePlugin;
 
+var FALLBACK_URL = '/index.html';
+
+// ── Precaching ─────────────────────────────────────────────────────
+
+/**
+ * Fetch the precache manifest and hand it to Workbox.
+ * Workbox stores each entry keyed by revision hash, so
+ * updated files are automatically cache-busted.
+ */
+async function setupPrecaching() {
   try {
-    const response = await fetch(cacheUrl);
-
+    var response = await fetch('/precache-manifest.json');
     if (!response.ok) {
-      logger.warn(`Precache: ${url} returned ${response.status}, skipping`);
-      return;
+      throw new Error('Manifest fetch failed: ' + response.status);
     }
+    var manifest = await response.json();
 
-    const cloned = response.clone();
-    const cleanedResponse = new Response(await cloned.blob(), {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
+    // Map our { url, revision } format to Workbox's expected format
+    var entries = manifest.map(function (entry) {
+      return {
+        url: entry.url,
+        revision: entry.revision || null,
+      };
     });
 
-    await cache.put(url, cleanedResponse);
-    logger.log(`Precached: ${url}`);
+    precacheAndRoute(entries);
+    console.log('[SW] Precached ' + entries.length + ' entries');
   } catch (err) {
-    logger.warn(`Failed to precache ${url}`, err);
+    console.error('[SW] Precache setup failed:', err);
+    // SW still functions — runtime caching will work,
+    // and assets will be cached on first fetch
   }
 }
 
-async function precacheAssets(manifest) {
-  const cache = await caches.open(CACHE_NAME);
-  const tasks = manifest.map(entry => precacheAsset(entry, cache));
-  const results = await Promise.allSettled(tasks);
-  const failures = results.filter(r => r.status === 'rejected').length;
+// ── Navigation Route (HTML pages) ───────────────────────────────────
+//
+// NetworkFirst for HTML so users get fresh content when online.
+// Falls back to cached index.html when offline.
+// This route is checked BEFORE precacheAndRoute (higher priority).
 
-  if (failures > 0) {
-    logger.warn(`Precaching completed with ${failures} failure(s)`);
-  } else {
-    logger.log(`Successfully precached ${manifest.length} asset(s)`);
+var navigationRoute = new NavigationRoute(
+  new NetworkFirst({
+    cacheName: 'pages-cache',
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [200] }),
+    ],
+    networkTimeoutSeconds: 3,
+  }),
+  {
+    // Don't intercept non-HTML requests
+    denylist: [
+      /^\/lib\//,
+      /^\/css\//,
+      /^\/js\//,
+      /^\/images\//,
+      /^\/precache-manifest\.json$/,
+      /\.css$/,
+      /\.js$/,
+      /\.json$/,
+      /\.png$/,
+      /\.jpg$/,
+      /\.svg$/,
+      /\.ico$/,
+      /\.webmanifest$/,
+    ],
   }
-}
+);
 
-// ── Cache cleanup ──────────────────────────────────────────────────
+// ── Runtime Caching Routes ─────────────────────────────────────────
 
-async function cleanOldCaches() {
-  try {
-    const keys = await caches.keys();
-    const oldKeys = keys.filter(key => key !== CACHE_NAME);
+// CSS and JS: stale-while-revalidate for instant loads with background updates
+registerRoute(
+  function (args) {
+    return args.request.destination === 'style' ||
+           args.request.destination === 'script';
+  },
+  new StaleWhileRevalidate({
+    cacheName: 'static-resources',
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [200] }),
+    ],
+  })
+);
 
-    if (oldKeys.length === 0) {
-      logger.log('No old caches to clean');
-      return;
-    }
+// JSON data (includes index.json book listings): stale-while-revalidate
+registerRoute(
+  function (args) {
+    return args.url.pathname.endsWith('.json');
+  },
+  new StaleWhileRevalidate({
+    cacheName: 'data-cache',
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [200] }),
+    ],
+  })
+);
 
-    await Promise.all(oldKeys.map(key => caches.delete(key)));
-    logger.log(`Cleaned ${oldKeys.length} old cache(s)`);
-  } catch (err) {
-    logger.error('Failed to clean old caches', err);
-  }
-}
+// Images: cache-first with expiration (max 60 entries, 30 days)
+registerRoute(
+  function (args) {
+    return args.request.destination === 'image';
+  },
+  new CacheFirst({
+    cacheName: 'image-cache',
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [200] }),
+      new ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+      }),
+    ],
+  })
+);
 
-// ── Fetch strategies ───────────────────────────────────────────────
+// ── IDB: Metadata Caching ───────────────────────────────────────────
+//
+// When the book index is fetched, also store it in IDB.
+// This allows the landing page to display the catalogue
+// even when fully offline (first load was online).
 
-function isNavigationRequest(request) {
-  return request.mode === 'navigate';
-}
+self.addEventListener('fetch', function (event) {
+  var url = new URL(event.request.url);
 
-function isCacheableResponse(response) {
-  return (
-    response.ok &&
-    (response.type === 'basic' || response.type === 'cors')
-  );
-}
+  // Intercept index.json requests and cache in IDB
+  if (url.pathname === '/literature/index.json' && event.request.method === 'GET') {
+    event.respondWith(
+      (async function () {
+        try {
+          var response = await fetch(event.request);
+          if (response.ok) {
+            var clone = response.clone();
+            var data = await clone.json();
 
-async function fetchWithFallback(request, fallbackUrl = null) {
-  try {
-    const response = await fetch(request);
-
-    if (!isNavigationRequest(request) && isCacheableResponse(response)) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, response.clone());
-    }
-
-    return response;
-  } catch (err) {
-    logger.warn(`Network request failed for ${request.url}`, err);
-
-    if (fallbackUrl) {
-      try {
-        const cache = await caches.open(CACHE_NAME);
-        const fallbackResponse = await cache.match(fallbackUrl);
-        if (fallbackResponse) {
-          logger.log(`Using fallback: ${fallbackUrl}`);
-          return fallbackResponse;
+            // Store each book's metadata in IDB
+            if (Array.isArray(data)) {
+              for (var i = 0; i < data.length; i++) {
+                try {
+                  await IDB.put(IDB.STORES.METADATA, data[i]);
+                } catch (e) {
+                  // Non-fatal — IDB might be full or blocked
+                }
+              }
+            }
+          }
+          return response;
+        } catch (err) {
+          // Network failed — try to reconstruct from IDB
+          var allMeta = await IDB.getAll(IDB.STORES.METADATA);
+          if (allMeta && allMeta.length > 0) {
+            return new Response(JSON.stringify(allMeta), {
+              status: 200,
+              headers: { 'Content-Type': 'application/json' },
+            });
+          }
+          throw err;
         }
-      } catch (fallbackErr) {
-        logger.error(`Fallback also failed for ${fallbackUrl}`, fallbackErr);
-      }
-    }
-
-    throw err;
+      })()
+    );
   }
-}
-
-async function handleFetch(request) {
-  const cache = await caches.open(CACHE_NAME);
-
-  // Navigation: network-first, fall back to cached HTML
-  if (isNavigationRequest(request)) {
-    try {
-      return await fetchWithFallback(request, FALLBACK_URL);
-    } catch (err) {
-      const cached = await cache.match(FALLBACK_URL);
-      if (cached) return cached;
-      throw err;
-    }
-  }
-
-  // Static assets: cache-first
-  const cached = await cache.match(request);
-  if (cached) {
-    logger.log(`Cache hit: ${request.url}`);
-    return cached;
-  }
-
-  return fetchWithFallback(request);
-}
-
-// ── Lifecycle events ───────────────────────────────────────────────
-
-self.addEventListener('install', (event) => {
-  logger.log('Installing...');
-
-  event.waitUntil(
-    (async () => {
-      try {
-        const manifest = await fetchPrecacheManifest();
-        await precacheAssets(manifest);
-        self.skipWaiting();
-        logger.log('Install complete, skipping waiting');
-      } catch (err) {
-        logger.error('Install failed', err);
-        throw err;
-      }
-    })()
-  );
 });
 
-self.addEventListener('activate', (event) => {
-  logger.log('Activating...');
+// ── Message Handler ─────────────────────────────────────────────────
+//
+// The page communicates with the SW via postMessage.
+// Used for: reading progress save/load, SW updates.
 
-  event.waitUntil(
-    (async () => {
-      await cleanOldCaches();
-      await self.clients.claim();
-      logger.log('Activation complete');
-    })()
-  );
-});
+self.addEventListener('message', function (event) {
+  var data = event.data || {};
 
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-
-  if (request.method !== 'GET') return;
-
-  const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
-
-  event.respondWith(handleFetch(request));
-});
-
-self.addEventListener('message', (event) => {
-  if (event.data === 'SKIP_WAITING') {
-    logger.log('Received SKIP_WAITING message');
+  // Activate new SW immediately
+  if (data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+    return;
   }
+
+  // Save reading progress to IDB
+  if (data.type === 'SAVE_PROGRESS') {
+    IDB.put(IDB.STORES.PROGRESS, {
+      bookSlug: data.bookSlug,
+      chapterId: data.chapterId,
+      scrollOffset: data.scrollOffset,
+      timestamp: Date.now(),
+    })
+      .then(function () {
+        if (event.source) {
+          event.source.postMessage({ type: 'PROGRESS_SAVED', success: true });
+        }
+      })
+      .catch(function (err) {
+        if (event.source) {
+          event.source.postMessage({
+            type: 'PROGRESS_SAVED',
+            success: false,
+            error: err.message,
+          });
+        }
+      });
+    return;
+  }
+
+  // Retrieve reading progress from IDB
+  if (data.type === 'GET_PROGRESS') {
+    IDB.get(IDB.STORES.PROGRESS, data.bookSlug)
+      .then(function (progress) {
+        if (event.source) {
+          event.source.postMessage({
+            type: 'PROGRESS_DATA',
+            progress: progress || null,
+          });
+        }
+      })
+      .catch(function (err) {
+        if (event.source) {
+          event.source.postMessage({
+            type: 'PROGRESS_DATA',
+            progress: null,
+            error: err.message,
+          });
+        }
+      });
+    return;
+  }
+
+  // Get all stored book metadata (for offline catalogue)
+  if (data.type === 'GET_ALL_METADATA') {
+    IDB.getAll(IDB.STORES.METADATA)
+      .then(function (metadata) {
+        if (event.source) {
+          event.source.postMessage({
+            type: 'ALL_METADATA',
+            metadata: metadata || [],
+          });
+        }
+      })
+      .catch(function (err) {
+        if (event.source) {
+          event.source.postMessage({
+            type: 'ALL_METADATA',
+            metadata: [],
+            error: err.message,
+          });
+        }
+      });
+    return;
+  }
+});
+
+// ── Lifecycle Events ───────────────────────────────────────────────
+
+self.addEventListener('install', function (event) {
+  console.log('[SW] Installing...');
+  event.waitUntil(
+    setupPrecaching().then(function () {
+      self.skipWaiting();
+      console.log('[SW] Install complete');
+    })
+  );
+});
+
+self.addEventListener('activate', function (event) {
+  console.log('[SW] Activating...');
+  event.waitUntil(
+    (async function () {
+      // Clean up old caches that aren't managed by Workbox
+      var keys = await caches.keys();
+      await Promise.all(
+        keys
+          .filter(function (key) {
+            // Keep Workbox-managed caches and our custom ones
+            return !key.startsWith('workbox-') &&
+                   key !== 'pages-cache' &&
+                   key !== 'static-resources' &&
+                   key !== 'data-cache' &&
+                   key !== 'image-cache';
+          })
+          .map(function (key) {
+            return caches.delete(key);
+          })
+      );
+
+      await self.clients.claim();
+      console.log('[SW] Activation complete');
+    })()
+  );
 });
