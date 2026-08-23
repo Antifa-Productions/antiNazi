@@ -1,182 +1,170 @@
 # Literature PWA
 
-Converts plain-text public-domain literature into accessible HTML5 documents and serves them as an offline-capable Progressive Web App. Each book is placed in its own directory as `index.html` for clean URLs.
+Converts plain-text public-domain literature into accessible HTML5 documents and serves them as an offline-capable Progressive Web App. Each book is placed in its own directory as `index.html` for clean URLs. The service worker uses self-hosted Workbox v7 for precaching and routing, with IndexedDB for reading progress tracking and offline catalogue browsing.
 
 ## Quick Start
 
 1. Drop a `.txt` file into `public/text/`
 2. Push to GitHub
-3. The **Convert Literature** action generates a book directory with `index.html` inside `public/literature/`
-4. The **Hash Precache Manifest** action scans all asset directories and produces `public/precache-manifest.json`
-5. The service worker uses that manifest for offline caching
+3. Actions automatically: download Workbox (first run), convert to HTML, build index, hash manifest
+4. Browse offline — reading progress is saved automatically
 
 ## How It Works
+You push a .txt file → GitHub Action converts to HTML5 + builds index → Hasher creates SHA1 manifest → Service worker precaches everything offline
 
-### Step-by-step flow
+### Data Flow
 
-1. You upload a plain-text book (Project Gutenberg format works best) to `public/text/`
-2. The `convert-literature.yml` GitHub Action triggers automatically on push
-3. `src/convert.mjs` parses the text file:
-   - Reads the Gutenberg header for title, author, language, and release date
-   - Detects `CHAPTER I`, `PART TWO`, `ACT III`, etc. and creates `<section>` blocks with `aria-labelledby`
-   - Splits paragraphs at blank lines
-   - Processes inline formatting (`_italic_`, `**bold**`)
-   - Extracts `[1]`-style footnotes and inserts bidirectional links
-4. `src/convert.mjs` creates a directory named after the book's slugified title inside `public/literature/` and writes `index.html` into it
-5. `src/template.mjs` renders the structured data into a complete HTML5 document with:
-   - Semantic markup (`<article>`, `<section>`, `<header>`, `<footer>`, `<nav>`)
-   - Schema.org JSON-LD metadata
-   - Skip link, ARIA labels, breadcrumb navigation
-   - CSS custom properties for theming
-   - Light/dark mode via `prefers-color-scheme`
-   - Footnote navigation with `aria-label` on return links
-6. The HTML is committed to `public/literature/[book-name]/index.html`
-7. The `hash-manifest.yml` GitHub Action triggers (either via `workflow_run` after conversion, or independently on pushes to watched directories)
-8. `src/hash-files.mjs` walks all configured directories under `public/`, computes SHA1 hashes, and writes `public/precache-manifest.json`
-9. On the client side, `sw-register.js` loads `sw.js` on page load
-10. The service worker fetches `precache-manifest.json`, caches every listed file, and serves cache-first on subsequent visits
-11. Non-precached requests fall through to network with runtime caching
-12. Navigation requests that fail (offline) get the cached `index.html` as a fallback
+1. Text file in `public/text/` triggers `convert-literature.yml`
+2. `convert.mjs` parses Gutenberg header, chapters, footnotes
+3. Book created at `public/literature/[slug]/index.html`
+4. `build-index.mjs` creates `public/literature/index.json` with all book metadata
+5. `hash-manifest.yml` runs after conversion, generates `precache-manifest.json`
+6. Service worker (`sw.js`) loads Workbox + IDB, precaches all files
+7. Reading progress tracked via IDB messages between page and SW
 
 ## Local Development
 
-Install (no external dependencies needed — pure Node.js)
 ```sh
-npm install
+npm install              # Install Node modules (none required for core)
+npm run setup            # Download Workbox v7 libraries
+npm run convert:all      # Convert all text files
+npm run index            # Build literature JSON index
+npm run hash             # Generate SHA1 manifest
+npm run build            # All of the above
 ```
-Convert all text files in public/text/
-```sh
-npm run convert:all
-```
-Convert a single file
-```sh
-node src/convert.mjs public/text/myfile.txt
-```
-Generate the precache manifest
-```sh
-npm run hash
-```
-Both in sequence
-```sh
-npm run build
-```
+Repository Structure
+antinazi/
+├── .github/workflows/
+│   ├── setup-dependencies.yml    # Downloads Workbox on push
+│   ├── convert-literature.yml    # Converts text → HTML, builds index
+│   └── hash-manifest.yml         # Hashes files, updates manifest
+├── src/
+│   ├── convert.mjs               # Plain-text → structured book object
+│   ├── template.mjs              # Book object → semantic HTML5 document
+│   ├── build-index.mjs           # Scans literature/, creates index.json
+│   ├── hash-files.mjs            # Directory walker → SHA1 manifest
+│   ├── download-workbox.mjs      # Downloads Workbox v7 from CDN
+│   └── utils.mjs                 # Shared helpers
+├── public/
+│   ├── index.html                # Landing page with book catalogue
+│   ├── manifest.webmanifest      # PWA manifest
+│   ├── sw.js                     # Service worker with Workbox + IDB
+│   ├── sw-register.js            # SW registration
+│   ├── precache-manifest.json    # Auto-generated by hash-files.mjs
+│   ├── _headers                  # MIME type rules for Cloudflare
+│   ├── css/
+│   │   └── style.css             # Base stylesheet (dark mode, custom props)
+│   ├── js/
+│   │   ├── app.js                # Landing page catalogue logic
+│   │   └── reader.js             # Reading progress tracking per book
+│   ├── lib/
+│   │   └── workbox/              # Self-hosted Workbox v7 files
+│   ├── literature/               # Generated book directories
+│   │   ├── [book-slug]/
+│   │   │   └── index.html
+│   │   └── index.json            # Auto-generated book catalogue
+│   ├── text/                     # Source plain-text files (your input)
+│   ├── Archive/                  # Additional cached files
+│   └── images/                   # PWA icons, OG images
+├── wrangler.toml                 # Pages config (MIME types, HTML handling)
+├── package.json
+├── README.md
+├── SECURITY.md
+└── .gitignore
+Configuration
 
-## Repository Structure
+Cloudflare Setup
+1. Create wrangler.toml in repo root:
+name = "antinazi-literature"
+compatibility_date = "2026-08-20"
+pages_build_output_dir = "./public"
+2. Create public/_headers with MIME type rules:
+/*
+  Content-Type: text/html; charset=utf-8
 
-antinazi/ ├── .github/workflows/ │ ├── convert-literature.yml # Auto-converts .txt → .html on push │ └── hash-manifest.yml # Auto-generates precache manifest on push ├── src/ │ ├── convert.mjs # Plain-text parser → structured book object │ ├── template.mjs # Book object → semantic HTML5 document │ ├── hash-files.mjs # Directory walker → SHA1 precache manifest │ └── utils.mjs # Shared helpers (escapeHtml, slugify, regex) ├── public/ │ ├── index.html # Landing page │ ├── manifest.webmanifest # PWA manifest │ ├── sw.js # Service worker (cache-first precaching) │ ├── sw-register.js # SW registration with update detection │ ├── precache-manifest.json # Auto-generated by hash-files.mjs │ ├── css/ │ │ └── style.css # Base stylesheet (dark mode, custom properties) │ ├── js/ │ │ └── app.js # Lightweight app-shell logic │ ├── literature/ # Generated book directories (auto-committed) │ │ └── book-title/ │ │ └── index.html # Each book gets its own directory │ ├── text/ # Source plain-text files (your input) │ ├── Archive/ # Additional cached files │ └── images/ # PWA icons, OG images ├── package.json ├── README.md └── .gitignore
+/*.json
+  Content-Type: application/json; charset=utf-8
 
-## URL Structure
+/*.css
+  Content-Type: text/css; charset=utf-8
 
-Each converted book is placed in its own directory with `index.html` inside:
-
-| File in repo | Live URL |
-|---|---|
-| `public/index.html` | `https://yourdomain.com/` |
-| `public/literature/prison-diaries/index.html` | `https://yourdomain.com/literature/prison-diaries/` |
-| `public/literature/anarchism-and-other-essays/index.html` | `https://yourdomain.com/literature/anarchism-and-other-essays/` |
-
-## Configuration
-
-### Adding scan paths for hashing
-
-Edit the `PATHS` array in `src/hash-files.mjs`:
-
-```js
-const PATHS = [ 'Archive', 'css', 'js', 'literature', 'images', // add new directories here ];
-```
-
-Then add corresponding `paths:` entries to `.github/workflows/hash-manifest.yml` so the action triggers on those directories too.
-
+/*.js
+  Content-Type: text/javascript; charset=utf-8
+  
 ### GitHub Actions
 
 | Action | Trigger | What it does |
 |---|---|---|
-| `convert-literature.yml` | Push to `public/text/**/*.txt` on `main`, or manual dispatch | Runs `convert.mjs --all`, commits book directories to `public/literature/` |
-| `hash-manifest.yml` | Push to any watched directory on `main`, after Convert Literature completes, or manual dispatch | Runs `hash-files.mjs`, commits `precache-manifest.json` |
+| `setup-dependencies.yml` | Push to `package.json`, manual dispatch | Downloads Workbox v7 to `public/lib/workbox/` |
+| `convert-literature.yml` | Push to `public/text/**/*.txt`, manual dispatch | Converts books, builds index JSON |
+| `hash-manifest.yml` | Push to any watched path, after Convert Literature completes | Hashes all files, updates manifest |
 
-The `workflow_run` trigger ensures hashing runs *after* conversion finishes — they won't race. Both actions can also be triggered manually from the Actions tab via `workflow_dispatch`.
-
-### Font Stacks
-
-All fonts use system-first stacks — no external font loading:
+Font Stacks
+System-first, no external loading:
 ```css
---mono-font: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", "Roboto Mono", "Liberation Mono", "Noto Sans Mono", Menlo, monospace; --sans-font: ui-sans-serif, "SF Pro Text", "Segoe UI", "Open Sans", Roboto, "Liberation Sans", "Noto Sans", sans-serif; --serif-font: ui-serif, "New York", "Liberation Serif", "Noto Serif", "Roboto Slab", serif;
+--mono-font: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", "Roboto Mono", "Liberation Mono", "Noto Sans Mono", Menlo, monospace;
+--sans-font: ui-sans-serif, "SF Pro Text", "Segoe UI", "Open Sans", Roboto, "Liberation Sans", "Noto Sans", sans-serif;
+--serif-font: ui-serif, "New York", "Liberation Serif", "Noto Serif", "Roboto Slab", serif;
 ```
 
-Body text uses `--serif-font`, headings use `--sans-font`, and `code`/`kbd`/`samp` use `--mono-font`.
-
 ### Color Palette
+Light mode: --dusty-grape: #54428e, --lavender-purple: #8963ba, --celadon: #afe3c0, --willow-green: #90c290, --dusty-olive: #688b58
 
-Light mode:
+Dark mode: Same hue families with luminance adjusted for contrast.
 
-| Token | Hex |
+## Service Worker Features
+
+| Feature | Implementation |
 |---|---|
-| `--dusty-grape` | `#54428e` |
-| `--lavender-purple` | `#8963ba` |
-| `--celadon` | `#afe3c0` |
-| `--willow-green` | `#90c290` |
-| `--dusty-olive` | `#688b58` |
+| Precaching | Workbox v7 with content-hash cache busting |
+| HTML navigation | Network-first, fallback to cached `index.html` |
+| CSS / JS | Stale-while-revalidate |
+| JSON data | Stale-while-revalidate with IDB backup |
+| Images | Cache-first with 60-entry, 30-day expiration |
+| Reading progress | IndexedDB via postMessage channel |
+| Offline catalogue | IDB-stored book metadata |
+| Updates | SKIP_WAITING message, claim on activate |
+| MIME types | Self-serve via Cloudflare `_headers` |
 
-Dark mode (same hue families, luminance adjusted):
+### Supported Text Formats
 
-| Token | Hex |
-|---|---|
-| `--dusty-grape` | `#9d89d6` |
-| `--lavender-purple` | `#b89de0` |
-| `--celadon` | `#5a9a6a` |
-| `--willow-green` | `#6fa86f` |
-| `--dusty-olive` | `#94b274` |
+Designed around Project Gutenberg plain-text format:
 
-Semantic tokens (`--text-primary`, `--bg-primary`, `--link-color`, etc.) reference the palette tokens, so the entire scheme stays coherent.
+*** START OF / *** END OF markers strip boilerplate
+Title:, Author:, Language:, Release Date: extracted from header
+Chapter headings: CHAPTER I, Chapter 1, PART ONE, ACT III
+ALL-CAPS lines as subsection headings
+Blank line paragraph separation
+_italic_, *italic*, **bold** inline formatting
+[1] footnote references with bidirectional links
+If Gutenberg markers are absent, converter degrades gracefully — processes entire file as content.
 
-### Footer Links
+### Tech Stack
 
-Each generated book page includes a footer with links to:
+Runtime: Node.js 20+ (ESM, zero dependencies)
+CI: GitHub Actions (Ubuntu, Node 20)
+PWA: Self-hosted Workbox v7, custom IDB wrapper
+CSS: Custom properties, clamp() typography, prefers-color-scheme: dark
+HTML: Semantic HTML5, ARIA, Schema.org JSON-LD
+Hosting: Cloudflare Pages with wrangler.toml config
+Dependencies: Pure Node.js standard library only
 
-- `/About`
-- `/Privacy-Policy`
-- `/Accessibility-Statement`
-- `/Terms-of-Service`
-- `/Gutenberg-License`
+### Security
 
-The Project Gutenberg license text is **not** embedded in individual book pages — it lives on a single dedicated page at `/Gutenberg-License`.
+No unsafe-eval or unsafe-inline in CSP
+Zero external runtime dependencies
+Input sanitization (all text escaped before rendering)
+Same-origin service worker enforcement
+SHA1 content-addressed caching for integrity
+See SECURITY.md for vulnerability reporting.
 
-## Service Worker Strategy
 
-| Request type | Strategy |
-|---|---|
-| Precached URLs | Cache-first |
-| Same-origin GET (not precached) | Network-first, cache successful responses at runtime |
-| Navigation requests (offline) | Fall back to cached `index.html` |
-| Cross-origin | Bypassed (not handled by SW) |
+Source code: AGPL-3.0-or-later.
 
-The cache version is controlled by `CACHE_NAME` in `sw.js`. Increment the version to force a full cache refresh on next visit.
+Literature texts: Public domain (sourced from Project Gutenberg).
 
-## Supported Text Formats
+### License
 
-The converter is designed around Project Gutenberg's plain-text format:
+Source code: AGPL-3.0-or-later.
 
-- Looks for `*** START OF` and `*** END OF` markers to strip boilerplate
-- Reads `Title:`, `Author:`, `Language:`, `Release Date:` from the header
-- Detects chapter headings: `CHAPTER I`, `Chapter 1`, `CHAPTER THE FIRST`, `PART ONE`, `ACT III`, etc.
-- Detects ALL-CAPS lines as subsection headings (when surrounded by blank lines)
-- Splits paragraphs at blank lines, joins wrapped lines
-- Processes `_italic_`, `*italic*`, and `**bold**` inline formatting
-- Extracts `[1]`-style footnotes into a `<ol class="footnotes">` with bidirectional links
-
-If Gutenberg markers are absent, the converter degrades gracefully — it processes the entire file as content and uses the filename as the title.
-
-## Tech Stack
-
-- **Runtime**: Node.js 20+ (ESM)
-- **CI**: GitHub Actions (Ubuntu, Node 20)
-- **PWA**: Vanilla service worker, no Workbox dependency
-- **CSS**: Custom properties, `clamp()` typography, `prefers-color-scheme: dark`
-- **HTML**: Semantic HTML5, ARIA, Schema.org JSON-LD
-- **Dependencies**: Zero (pure Node.js standard library)
-
-## License
-
-Source code: [AGPL-3.0-or-later]([https://unlicense.org/](https://spdx.org/licenses/AGPL-3.0-or-later.html)).
-
-Literature texts: Public domain (sourced from [Project Gutenberg](https://www.gutenberg.org/)).
+Literature texts: Public domain (sourced from Project Gutenberg).
