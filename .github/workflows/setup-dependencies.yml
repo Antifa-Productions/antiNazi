@@ -1,0 +1,49 @@
+# ============================================================
+# One-time setup: downloads Workbox v7 production files
+# and commits them to public/lib/workbox/.
+#
+# Run manually from the Actions tab, or it runs automatically
+# when package.json changes.
+# ============================================================
+
+name: Setup Dependencies
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'package.json'
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    name: Download Workbox libraries
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download Workbox
+        run: node src/download-workbox.mjs
+
+      - name: Commit Workbox files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/lib/
+          if git diff --cached --quiet; then
+            echo "No new Workbox files to commit."
+          else
+            git commit -m "chore: download Workbox v7 libraries [auto]"
+            git push
+          fi
