@@ -5,7 +5,7 @@
   },
   {
     "url": "/css/style.css",
-    "revision": "176833a1a37dba750c14bc60f16ae0aa9d8f0233"
+    "revision": "6b380ffebdf98f84be13abe651e6a40a31f68c39"
   },
   {
     "url": "/images/png/antiNazi.org_1200x630.png",
@@ -65,103 +65,155 @@
   },
   {
     "url": "/js/app.js",
-    "revision": "7d5c26b931c296b3325c28cdbaefca5543e90e45"
+    "revision": "e200062bee20166fd722109c7f4c489b6330fadc"
+  },
+  {
+    "url": "/js/reader.js",
+    "revision": "f98117df2681a2d9a271c3cb510960d94a39f3e2"
+  },
+  {
+    "url": "/lib/idb.js",
+    "revision": "db64677816384fea9dff1865e837a9626200066b"
+  },
+  {
+    "url": "/lib/workbox/workbox-cacheable-response.prod.js",
+    "revision": "0a1a92593bd999854946c52f1739c74dc77fc004"
+  },
+  {
+    "url": "/lib/workbox/workbox-core.prod.js",
+    "revision": "80b68c11245c347d8d0c9e56e5d2bd5165eee6f9"
+  },
+  {
+    "url": "/lib/workbox/workbox-expiration.prod.js",
+    "revision": "51439122987dc941adbb3b5f24c988f69cf7bfba"
+  },
+  {
+    "url": "/lib/workbox/workbox-precaching.prod.js",
+    "revision": "4ad24fd3da91e2151ef0ce69ef006289e0dd323a"
+  },
+  {
+    "url": "/lib/workbox/workbox-routing.prod.js",
+    "revision": "ad8c74464c4717dd9a88157cfd8a9173c542cadb"
+  },
+  {
+    "url": "/lib/workbox/workbox-strategies.prod.js",
+    "revision": "82f34d0fb384dfa9db80aaa5c0004e1cbfa92b59"
+  },
+  {
+    "url": "/lib/workbox/workbox-sw.js",
+    "revision": "b8d8ef56b3ee957e64a732de532eb42079ed1775"
   },
   {
     "url": "/literature/a-fragment-of-the-prison-experiences-of-emma-goldman-and-alexander-berkman/index.html",
-    "revision": "b0d646756889a88dbb0a2480f054f331b10ee85c"
+    "revision": "166b73de9036363d8861f411d950c7bd75618fcd"
   },
   {
     "url": "/literature/an-anarchist-woman/index.html",
-    "revision": "af38b3fe3aac6d6163d7b57fbf833a5c61573320"
+    "revision": "27bfb18749f0eb9564bf871af9b059b2df38fcaa"
   },
   {
     "url": "/literature/anarchism-and-other-essays/index.html",
-    "revision": "d33a6bc00a96de148234883a3f8bddc5c039d3d2"
+    "revision": "4b2c8ab123dede1d98a31d2e92b429c6412b4b20"
   },
   {
     "url": "/literature/anarchism/index.html",
-    "revision": "80b0121cface77e5a37431f14c545bd4025b113f"
+    "revision": "6ea8f454718f5a7535071a1d81e67a5ac0ddb7cc"
   },
   {
     "url": "/literature/anarchy/index.html",
-    "revision": "8a643dddda06ec7d024351abb0db275f0145ad65"
+    "revision": "a9d9a01cdb86c3e3c8a10acb9969a2939688a9cb"
+  },
+  {
+    "url": "/literature/dal-cellulare-a-finalborgo/index.html",
+    "revision": "961c155701f8d770b65b4deee25e1791d5a12318"
   },
   {
     "url": "/literature/deportation-its-meaning-and-menace/index.html",
-    "revision": "3b8fd70ac20a8413302ff161d779be0c408259d7"
+    "revision": "c233548a26ed998df1b0ee10ea63ff37c3990fa3"
   },
   {
     "url": "/literature/emma-goldman-biographical-sketch/index.html",
-    "revision": "7c0b489a0fe799bf6b76cd22b1a9d7488c2787d6"
+    "revision": "a46a7d0ecb73ba11fea6d0afb735dab6b7ce59e8"
   },
   {
     "url": "/literature/fra-contadini/index.html",
-    "revision": "788688c3c1ef8d29cafca2d715c7535507d93868"
+    "revision": "3a04bfb7933c2b81d06a28b8c5cf3f4d575b6cec"
   },
   {
     "url": "/literature/god-and-the-state/index.html",
-    "revision": "a1bc9195a190baab0a1afaf8a3754fde6854986b"
+    "revision": "aa1ff907b664776217b7d70461e0cc9f9685e8f9"
+  },
+  {
+    "url": "/literature/het-anarchisme-in-de-arbeidersbeweging/index.html",
+    "revision": "c4aac12d7414e189acfd16ef43838331d2b58856"
   },
   {
     "url": "/literature/index.json",
-    "revision": "b097546956698dd0ec70d6fbb8532323c6ff9fde"
+    "revision": "dccccdae128b6279dab43b66496ce1a34137599e"
   },
   {
     "url": "/literature/marriage-and-love/index.html",
-    "revision": "e4e970bfd0d3be2e84ccdb1dab64015a4843deff"
+    "revision": "4db1f6e081628e21aebcc0aff1ad8f5377b89d11"
   },
   {
     "url": "/literature/mother-earth-vol-1-no-1-march-1906/index.html",
-    "revision": "9147413586296633a7d08ed8bce3fc6dad6be313"
+    "revision": "34bad0b58c59e1786acfc8bc53eae35d4a45a7fd"
   },
   {
     "url": "/literature/mother-earth-vol-1-no-2-april-1906/index.html",
-    "revision": "9ee1eda3f4758d61da107cabdd2595e93bd2406a"
+    "revision": "16270ca650bc3a6bdf46c95e64d85f4d67a99e75"
   },
   {
     "url": "/literature/mother-earth-vol-1-no-3-may-1906/index.html",
-    "revision": "e80f50df6f03f4ad9610f4074df4d3d0654b370e"
+    "revision": "c6336daac839ae648ba2877da359f5cf73a1f039"
   },
   {
     "url": "/literature/mother-earth-vol-1-no-4-june-1906/index.html",
-    "revision": "84b56c19e4a61fe3ada8ca5e7f08f81a0389b253"
+    "revision": "d4990ff85eef2b96c5f7c10a796d71d840440946"
   },
   {
     "url": "/literature/mutual-aid-a-factor-of-evolution/index.html",
-    "revision": "2243d9bd3816e83a319804736c58e6a8d18a1f67"
+    "revision": "2291edf325257f2485c56ead4050d3e8d541a11f"
   },
   {
     "url": "/literature/prison-memoirs-of-an-anarchist/index.html",
-    "revision": "902c51e94dbfe14d615101d209690bd69d28288f"
+    "revision": "5ad41f995f237955f91e608a62ba2f1ef2225b6b"
+  },
+  {
+    "url": "/literature/ravachol-und-die-pariser-anarchisten/index.html",
+    "revision": "61423354db1146798cbf12f9643303d2490a68b4"
   },
   {
     "url": "/literature/selected-works-of-voltairine-de-cleyre/index.html",
-    "revision": "205267dd39d052d8add83c4e23d6be9b0f6ef221"
+    "revision": "41bfe105585a6db630244a65b91c8fd9f05bc15c"
   },
   {
     "url": "/literature/system-of-economical-contradictions-or-the-philosophy-of-misery/index.html",
-    "revision": "ec1288990daca07bd8b68b35576cbd69838270c1"
+    "revision": "903d2476c031b75b3884e418adbbd05c93d8385c"
   },
   {
     "url": "/literature/the-conquest-of-bread/index.html",
-    "revision": "ee9854203edba87dc1edcf26c7914587491de7a3"
+    "revision": "3bed468e20ab94deb6b8c11ce1084efc01437df8"
   },
   {
     "url": "/literature/the-kingdom-of-god-is-within-you/index.html",
-    "revision": "e69bb0c75876cc5fbff29ddd382c1c8c5901c47e"
+    "revision": "60ec6325b291486d21288f8bc318ff2d6738b00e"
   },
   {
     "url": "/literature/the-place-of-anarchism-in-socialistic-evolution/index.html",
-    "revision": "4c9b9797856bc5c7cc31be9e903dd3555afbef95"
+    "revision": "24957a81a82270f2876b3c892c7c9dcf529821f1"
   },
   {
     "url": "/literature/the-right-to-ignore-the-state/index.html",
-    "revision": "9b56dea24d758bd534959c33d049250b70c0a793"
+    "revision": "fc5181a84a2e421871164f9c2001d4bbd78b8a1a"
+  },
+  {
+    "url": "/literature/the-rise-and-fall-of-anarchy-in-america/index.html",
+    "revision": "60b97036dd356a41e3eafba1d7379602b2876976"
   },
   {
     "url": "/literature/what-is-property-an-inquiry-into-the-principle-of-right-and-of-government/index.html",
-    "revision": "ac6910bf04c4ef59b80392176a4b510aeb9bc088"
+    "revision": "f6066a6209862f0a9b2c5ec95a5a3685d6554c96"
   },
   {
     "url": "/manifest.webmanifest",
@@ -169,10 +221,10 @@
   },
   {
     "url": "/sw-register.js",
-    "revision": "e3872853a5ab3e2eed5247d06ca7e6c5dfe306e3"
+    "revision": "dd15617bad98d2674c0cd0e24b66a0a1c01a1032"
   },
   {
     "url": "/sw.js",
-    "revision": "b075d715521ae63f01a9a682065f63f2d84d7c1f"
+    "revision": "f09a339d5e1079f2f9b24151e2e8ced96a0773a8"
   }
 ]
