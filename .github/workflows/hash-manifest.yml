@@ -3,16 +3,17 @@ name: Hash Precache Manifest
 on:
   push:
     paths:
-      - 'public/_headers'
       - 'public/Archive/**'
       - 'public/css/**'
       - 'public/js/**'
+      - 'public/lib/**'
       - 'public/literature/**'
       - 'public/images/**'
       - 'public/index.html'
       - 'public/sw.js'
       - 'public/sw-register.js'
       - 'public/manifest.webmanifest'
+      - 'public/_headers'
       - 'src/hash-files.mjs'
     branches:
       - main
@@ -46,17 +47,6 @@ jobs:
         run: |
           if [ -f package.json ]; then npm ci || true; fi
 
-      - name: Run hasher
-        run: node src/hash-files.mjs
-
-      - name: Commit manifest
+      - name: Download Workbox (if missing)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/precache-manifest.json
-          if git diff --cached --quiet; then
-            echo "No manifest changes to commit."
-          else
-            git commit -m "chore: update precache manifest [auto]"
-            git push
-          fi
+          if [ ! -d public/lib/workbox ] || [ -z "$(ls -
