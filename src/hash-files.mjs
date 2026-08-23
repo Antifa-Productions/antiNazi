@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readFile, writeFile, readdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 
 const PUBLIC_DIR = join(process.cwd(), 'public');
@@ -9,6 +9,7 @@ const PATHS = [
   'Archive',
   'css',
   'js',
+  'lib',
   'literature',
   'images',
 ];
