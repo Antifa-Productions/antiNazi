@@ -4,11 +4,12 @@
   "description": "Converts plain-text literature into accessible HTML5 and serves as an offline-capable PWA.",
   "type": "module",
   "scripts": {
+    "setup": "node src/download-workbox.mjs",
     "convert": "node src/convert.mjs",
     "convert:all": "node src/convert.mjs --all",
     "index": "node src/build-index.mjs",
     "hash": "node src/hash-files.mjs",
-    "build": "node src/convert.mjs --all && node src/build-index.mjs && node src/hash-files.mjs"
+    "build": "node src/download-workbox.mjs && node src/convert.mjs --all && node src/build-index.mjs && node src/hash-files.mjs"
   },
   "engines": {
     "node": ">=20.0.0"
