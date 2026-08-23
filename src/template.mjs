@@ -56,6 +56,8 @@ ${items}
 ${JSON.stringify(schemaLd, null, 2)}
   </script>
   <script src="/sw-register.js" defer></script>
+  <script>window.__BOOK_SLUG__ = '${escapeHtml(book.fileName)}';</script>
+  <script src="/js/reader.js" defer></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
