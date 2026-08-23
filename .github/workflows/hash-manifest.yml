@@ -3,16 +3,17 @@ name: Hash Precache Manifest
 on:
   push:
     paths:
-      - 'public/_headers'
       - 'public/Archive/**'
       - 'public/css/**'
       - 'public/js/**'
+      - 'public/lib/**'
       - 'public/literature/**'
       - 'public/images/**'
       - 'public/index.html'
       - 'public/sw.js'
       - 'public/sw-register.js'
       - 'public/manifest.webmanifest'
+      - 'public/_headers'
       - 'src/hash-files.mjs'
     branches:
       - main
@@ -45,6 +46,15 @@ jobs:
       - name: Install dependencies
         run: |
           if [ -f package.json ]; then npm ci || true; fi
+
+      - name: Download Workbox (if missing)
+        run: |
+          if [ ! -d public/lib/workbox ] || [ -z "$(ls -A public/lib/workbox 2>/dev/null)" ]; then
+            echo "Workbox not found, downloading..."
+            node src/download-workbox.mjs
+          else
+            echo "Workbox already present, skipping download."
+          fi
 
       - name: Run hasher
         run: node src/hash-files.mjs
