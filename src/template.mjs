@@ -5,11 +5,19 @@ export function buildHtml(book, cssPath = '/css/style.css') {
   const datePublished = book.datePublished || '';
   const description = book.description || '';
 
+  // Render chapters with proper heading/paragraph distinction
   const chaptersHtml = book.chapters.map(ch => {
-    const paras = ch.paragraphs.map(p => `      <p>${p}</p>`).join('\n');
+    const subsectionsHtml = ch.subsections.map(sub => {
+      if (sub.type === 'heading') {
+        return `      <h3 id="${sub.id}">${escapeHtml(sub.content)}</h3>`;
+      }
+      // Paragraph
+      return `      <p>${sub.content}</p>`;
+    }).join('\n');
+
     return `    <section aria-labelledby="${ch.id}">
       <h2 id="${ch.id}">${escapeHtml(ch.heading)}</h2>
-${paras}
+${subsectionsHtml}
     </section>`;
   }).join('\n');
 
