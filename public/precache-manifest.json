@@ -1,9 +1,5 @@
 [
   {
-    "url": "/_headers",
-    "revision": "57b609a6aa1cedf506f6189e2c6ec891eea16e72"
-  },
-  {
     "url": "/css/style.css",
     "revision": "6b380ffebdf98f84be13abe651e6a40a31f68c39"
   },
@@ -437,7 +433,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "275ea75d73aeb581a1d5c9b0027f3d514eef7b19"
+    "revision": "fd92d5a4f3b26e3f625ff9644e111a896727912f"
   },
   {
     "url": "/sw-register.js",
