@@ -140,13 +140,8 @@ Same-origin service worker enforcement
 SHA1 content-addressed caching for integrity
 See SECURITY.md for vulnerability reporting.
 
-
-Source code: AGPL-3.0-or-later.
-
-Literature texts: Public domain (sourced from Project Gutenberg).
-
 ### License
 
-Source code: AGPL-3.0-or-later.
+**Source code: AGPL-3.0-or-later.**
 
-Literature texts: Public domain (sourced from Project Gutenberg).
+**Plain text literature files: Public domain (sourced from Project Gutenberg).**
