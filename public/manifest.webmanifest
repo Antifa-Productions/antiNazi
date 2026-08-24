@@ -20,11 +20,26 @@
       "type": "image/png",
       "purpose": "maskable"
     },
- {
+    {
       "src": "/images/png/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "dir": "ltr",
+  "lang": "en",
+  "orientation": "any",
+  "categories": [
+    "books",
+    "books &amp; reference",
+    "education",
+    "entertainment",
+    "government",
+    "lifestyle",
+    "politics",
+    "productivity",
+    "security",
+    "social"
   ]
 }
