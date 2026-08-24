@@ -9,6 +9,8 @@ on:
       - 'public/lib/**'
       - 'public/literature/**'
       - 'public/images/**'
+      - 'public/*.png'
+      - 'public/*.svg'
       - 'public/index.html'
       - 'public/sw.js'
       - 'public/sw-register.js'
