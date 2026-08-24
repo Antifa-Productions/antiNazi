@@ -6,6 +6,7 @@ const PUBLIC_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(PUBLIC_DIR, 'precache-manifest.json');
 
 const PATHS = [
+  '',           // Root of public/ — captures *.png, *.svg, *.ico, etc.
   'Archive',
   'css',
   'js',
@@ -16,6 +17,13 @@ const PATHS = [
 
 const SKIP_EXTENSIONS = new Set([
   '.md', '.gitkeep', '.DS_Store', '.map',
+]);
+
+// Files in the root directory that shouldn't be hashed or cached
+const SKIP_ROOT_FILES = new Set([
+  'wrangler.toml',
+  '.htaccess',
+  'CNAME',
 ]);
 
 async function walkDir(dir) {
@@ -52,27 +60,27 @@ async function sha1File(filePath) {
     const manifest = [];
 
     for (const subPath of PATHS) {
-      const absPath = join(PUBLIC_DIR, subPath);
-      console.log(`Scanning: ${subPath}/`);
+      const absPath = subPath === '' ? PUBLIC_DIR : join(PUBLIC_DIR, subPath);
+      const label = subPath === '' ? '(root)' : subPath;
+      console.log(`Scanning: ${label}/`);
+      
       const files = await walkDir(absPath);
 
       for (const file of files) {
         const rel = relative(PUBLIC_DIR, file).split(sep).join('/');
+        const basename = rel.split('/').pop();
+
+        // Skip excluded root files
+        if (subPath === '' && SKIP_ROOT_FILES.has(basename)) {
+          continue;
+        }
+
         const url = '/' + rel;
         const revision = await sha1File(file);
         manifest.push({ url, revision });
       }
 
       console.log(`  → Found ${files.length} file(s)`);
-    }
-
-    const rootFiles = ['index.html', 'manifest.webmanifest', 'sw.js', 'sw-register.js', '_headers'];
-    for (const name of rootFiles) {
-      const filePath = join(PUBLIC_DIR, name);
-      try {
-        const revision = await sha1File(filePath);
-        manifest.push({ url: '/' + name, revision });
-      } catch {}
     }
 
     manifest.sort((a, b) => a.url.localeCompare(b.url));
