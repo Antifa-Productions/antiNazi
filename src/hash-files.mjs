@@ -21,6 +21,7 @@ const SKIP_EXTENSIONS = new Set([
 
 // Files in the root directory that shouldn't be hashed or cached
 const SKIP_ROOT_FILES = new Set([
+  '_headers',
   'wrangler.toml',
   '.htaccess',
   'CNAME',
