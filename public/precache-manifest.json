@@ -4,10 +4,6 @@
     "revision": "6b380ffebdf98f84be13abe651e6a40a31f68c39"
   },
   {
-    "url": "/css/style.css",
-    "revision": "6b380ffebdf98f84be13abe651e6a40a31f68c39"
-  },
-  {
     "url": "/favicon.png",
     "revision": "e9923af44de5a3297586cef33148c46b635dbf80"
   },
@@ -20,20 +16,8 @@
     "revision": "a3b5c4db6af7f5026ca6c94fe07aed2ebfe67d82"
   },
   {
-    "url": "/images/png/antiNazi.org_1200x630.png",
-    "revision": "a3b5c4db6af7f5026ca6c94fe07aed2ebfe67d82"
-  },
-  {
     "url": "/images/png/apple-touch-icon-120x120.png",
     "revision": "bc48bdbc71529cfcc32c32d5e606e100cbaf3a36"
-  },
-  {
-    "url": "/images/png/apple-touch-icon-120x120.png",
-    "revision": "bc48bdbc71529cfcc32c32d5e606e100cbaf3a36"
-  },
-  {
-    "url": "/images/png/apple-touch-icon-180x180.png",
-    "revision": "e8bc8eace7213f4ee0fe16e6202a8cdab061648b"
   },
   {
     "url": "/images/png/apple-touch-icon-180x180.png",
@@ -44,20 +28,8 @@
     "revision": "d264de4cd0d66c6b7bf59cfd50808d5da5153dc8"
   },
   {
-    "url": "/images/png/favicon-96x96.png",
-    "revision": "d264de4cd0d66c6b7bf59cfd50808d5da5153dc8"
-  },
-  {
     "url": "/images/png/icon-128x128.png",
     "revision": "5e23ee0da07c7820a63553b545ba1e6190e1ccd4"
-  },
-  {
-    "url": "/images/png/icon-128x128.png",
-    "revision": "5e23ee0da07c7820a63553b545ba1e6190e1ccd4"
-  },
-  {
-    "url": "/images/png/icon-144x144.png",
-    "revision": "ff6b0553537fae93b5900f4832b873ac70b81a86"
   },
   {
     "url": "/images/png/icon-144x144.png",
@@ -68,20 +40,8 @@
     "revision": "0e4dd665f6aff5bebc4db6d227c3db0da61b3bee"
   },
   {
-    "url": "/images/png/icon-152x152.png",
-    "revision": "0e4dd665f6aff5bebc4db6d227c3db0da61b3bee"
-  },
-  {
     "url": "/images/png/icon-180x180.png",
     "revision": "a7a1d37680a38b2bee3c64f95d08ec485015cecb"
-  },
-  {
-    "url": "/images/png/icon-180x180.png",
-    "revision": "a7a1d37680a38b2bee3c64f95d08ec485015cecb"
-  },
-  {
-    "url": "/images/png/icon-192x192-maskable.png",
-    "revision": "1825a1a06ecf08a3ed4793f59a17b343cb727b5f"
   },
   {
     "url": "/images/png/icon-192x192-maskable.png",
@@ -92,28 +52,12 @@
     "revision": "0f491dc6c08a62236d4ea2d9c243082582405f71"
   },
   {
-    "url": "/images/png/icon-192x192.png",
-    "revision": "0f491dc6c08a62236d4ea2d9c243082582405f71"
-  },
-  {
-    "url": "/images/png/icon-384x384.png",
-    "revision": "28d857cea3019d20fb9fb3a8acc100d6ecb89a6a"
-  },
-  {
     "url": "/images/png/icon-384x384.png",
     "revision": "28d857cea3019d20fb9fb3a8acc100d6ecb89a6a"
   },
   {
     "url": "/images/png/icon-512x512-maskable.png",
     "revision": "a880ac9dcd1a6c9b6b71636fafd765110abde419"
-  },
-  {
-    "url": "/images/png/icon-512x512-maskable.png",
-    "revision": "a880ac9dcd1a6c9b6b71636fafd765110abde419"
-  },
-  {
-    "url": "/images/png/icon-512x512.png",
-    "revision": "c03a881acc936c21073c61f0057f70bcb1161ddc"
   },
   {
     "url": "/images/png/icon-512x512.png",
@@ -128,20 +72,8 @@
     "revision": "e200062bee20166fd722109c7f4c489b6330fadc"
   },
   {
-    "url": "/js/app.js",
-    "revision": "e200062bee20166fd722109c7f4c489b6330fadc"
-  },
-  {
     "url": "/js/reader.js",
     "revision": "f98117df2681a2d9a271c3cb510960d94a39f3e2"
-  },
-  {
-    "url": "/js/reader.js",
-    "revision": "f98117df2681a2d9a271c3cb510960d94a39f3e2"
-  },
-  {
-    "url": "/lib/idb.js",
-    "revision": "db64677816384fea9dff1865e837a9626200066b"
   },
   {
     "url": "/lib/idb.js",
@@ -152,20 +84,8 @@
     "revision": "0a1a92593bd999854946c52f1739c74dc77fc004"
   },
   {
-    "url": "/lib/workbox/workbox-cacheable-response.prod.js",
-    "revision": "0a1a92593bd999854946c52f1739c74dc77fc004"
-  },
-  {
     "url": "/lib/workbox/workbox-core.prod.js",
     "revision": "80b68c11245c347d8d0c9e56e5d2bd5165eee6f9"
-  },
-  {
-    "url": "/lib/workbox/workbox-core.prod.js",
-    "revision": "80b68c11245c347d8d0c9e56e5d2bd5165eee6f9"
-  },
-  {
-    "url": "/lib/workbox/workbox-expiration.prod.js",
-    "revision": "51439122987dc941adbb3b5f24c988f69cf7bfba"
   },
   {
     "url": "/lib/workbox/workbox-expiration.prod.js",
@@ -176,20 +96,8 @@
     "revision": "4ad24fd3da91e2151ef0ce69ef006289e0dd323a"
   },
   {
-    "url": "/lib/workbox/workbox-precaching.prod.js",
-    "revision": "4ad24fd3da91e2151ef0ce69ef006289e0dd323a"
-  },
-  {
     "url": "/lib/workbox/workbox-routing.prod.js",
     "revision": "ad8c74464c4717dd9a88157cfd8a9173c542cadb"
-  },
-  {
-    "url": "/lib/workbox/workbox-routing.prod.js",
-    "revision": "ad8c74464c4717dd9a88157cfd8a9173c542cadb"
-  },
-  {
-    "url": "/lib/workbox/workbox-strategies.prod.js",
-    "revision": "82f34d0fb384dfa9db80aaa5c0004e1cbfa92b59"
   },
   {
     "url": "/lib/workbox/workbox-strategies.prod.js",
@@ -200,20 +108,8 @@
     "revision": "b8d8ef56b3ee957e64a732de532eb42079ed1775"
   },
   {
-    "url": "/lib/workbox/workbox-sw.js",
-    "revision": "b8d8ef56b3ee957e64a732de532eb42079ed1775"
-  },
-  {
     "url": "/literature/a-fragment-of-the-prison-experiences-of-emma-goldman-and-alexander-berkman/index.html",
     "revision": "bedf2f3e45fb5cf3047914eb6fbab24212fc7f6f"
-  },
-  {
-    "url": "/literature/a-fragment-of-the-prison-experiences-of-emma-goldman-and-alexander-berkman/index.html",
-    "revision": "bedf2f3e45fb5cf3047914eb6fbab24212fc7f6f"
-  },
-  {
-    "url": "/literature/an-anarchist-woman/index.html",
-    "revision": "14a127baed8d5d5de3507261d1d80d8d06d8c8c3"
   },
   {
     "url": "/literature/an-anarchist-woman/index.html",
@@ -224,20 +120,8 @@
     "revision": "1df85d8e9d5755108adaf69eecbfe2554250e177"
   },
   {
-    "url": "/literature/anarchism-and-other-essays/index.html",
-    "revision": "1df85d8e9d5755108adaf69eecbfe2554250e177"
-  },
-  {
     "url": "/literature/anarchism/index.html",
     "revision": "4e4b32e0dc1cff65d58b411bf9df17abdbb94460"
-  },
-  {
-    "url": "/literature/anarchism/index.html",
-    "revision": "4e4b32e0dc1cff65d58b411bf9df17abdbb94460"
-  },
-  {
-    "url": "/literature/anarchy/index.html",
-    "revision": "caf275b1bc504dff193625229c6b05a93bd9e1a1"
   },
   {
     "url": "/literature/anarchy/index.html",
@@ -248,20 +132,8 @@
     "revision": "6f0f83c51d9ba1598c6d707cf8df330c7a5a276b"
   },
   {
-    "url": "/literature/dal-cellulare-a-finalborgo/index.html",
-    "revision": "6f0f83c51d9ba1598c6d707cf8df330c7a5a276b"
-  },
-  {
     "url": "/literature/deportation-its-meaning-and-menace/index.html",
     "revision": "fda507f0c12f57c62427116136ba996fd06e14ec"
-  },
-  {
-    "url": "/literature/deportation-its-meaning-and-menace/index.html",
-    "revision": "fda507f0c12f57c62427116136ba996fd06e14ec"
-  },
-  {
-    "url": "/literature/emma-goldman-biographical-sketch/index.html",
-    "revision": "eff31847c6f121204fed7fbfc052a572debf9e98"
   },
   {
     "url": "/literature/emma-goldman-biographical-sketch/index.html",
@@ -272,20 +144,8 @@
     "revision": "1fa2a08a2f0f4c5b1c2cfb82fcb7d75d17639720"
   },
   {
-    "url": "/literature/fra-contadini/index.html",
-    "revision": "1fa2a08a2f0f4c5b1c2cfb82fcb7d75d17639720"
-  },
-  {
     "url": "/literature/god-and-the-state/index.html",
     "revision": "f32edc5f2f160201624a3fe0f46fbcdfe64db9da"
-  },
-  {
-    "url": "/literature/god-and-the-state/index.html",
-    "revision": "f32edc5f2f160201624a3fe0f46fbcdfe64db9da"
-  },
-  {
-    "url": "/literature/het-anarchisme-in-de-arbeidersbeweging/index.html",
-    "revision": "61809a9b7efa00e8f8983ad948281cf4740f0943"
   },
   {
     "url": "/literature/het-anarchisme-in-de-arbeidersbeweging/index.html",
@@ -296,20 +156,8 @@
     "revision": "dccccdae128b6279dab43b66496ce1a34137599e"
   },
   {
-    "url": "/literature/index.json",
-    "revision": "dccccdae128b6279dab43b66496ce1a34137599e"
-  },
-  {
     "url": "/literature/marriage-and-love/index.html",
     "revision": "97a7d784d5d362fc9d147a2711f0312030fd3c16"
-  },
-  {
-    "url": "/literature/marriage-and-love/index.html",
-    "revision": "97a7d784d5d362fc9d147a2711f0312030fd3c16"
-  },
-  {
-    "url": "/literature/mother-earth-vol-1-no-1-march-1906/index.html",
-    "revision": "3353da5aca386359b92fa05851a6a89020179151"
   },
   {
     "url": "/literature/mother-earth-vol-1-no-1-march-1906/index.html",
@@ -320,20 +168,8 @@
     "revision": "3a4d731ed29b97057d2baf4c9e389e20a68e7a2b"
   },
   {
-    "url": "/literature/mother-earth-vol-1-no-2-april-1906/index.html",
-    "revision": "3a4d731ed29b97057d2baf4c9e389e20a68e7a2b"
-  },
-  {
     "url": "/literature/mother-earth-vol-1-no-3-may-1906/index.html",
     "revision": "deae0106f6bf74e138f3a6586f5a3b6e5bd9e949"
-  },
-  {
-    "url": "/literature/mother-earth-vol-1-no-3-may-1906/index.html",
-    "revision": "deae0106f6bf74e138f3a6586f5a3b6e5bd9e949"
-  },
-  {
-    "url": "/literature/mother-earth-vol-1-no-4-june-1906/index.html",
-    "revision": "50ab4a87332044dde2291bfdd5ddad90d8a6c49f"
   },
   {
     "url": "/literature/mother-earth-vol-1-no-4-june-1906/index.html",
@@ -344,20 +180,8 @@
     "revision": "63db0c41ccb0f91b8f2eb3b8e44fd2df25b315b6"
   },
   {
-    "url": "/literature/mutual-aid-a-factor-of-evolution/index.html",
-    "revision": "63db0c41ccb0f91b8f2eb3b8e44fd2df25b315b6"
-  },
-  {
     "url": "/literature/prison-memoirs-of-an-anarchist/index.html",
     "revision": "ddde04666c6682058df1c248f75b0038e700fc26"
-  },
-  {
-    "url": "/literature/prison-memoirs-of-an-anarchist/index.html",
-    "revision": "ddde04666c6682058df1c248f75b0038e700fc26"
-  },
-  {
-    "url": "/literature/ravachol-und-die-pariser-anarchisten/index.html",
-    "revision": "9cbac77d604a8f618e21e63729c71a05a48110e2"
   },
   {
     "url": "/literature/ravachol-und-die-pariser-anarchisten/index.html",
@@ -368,20 +192,8 @@
     "revision": "626fbd81230c5f672604f9758afa17d70559deed"
   },
   {
-    "url": "/literature/selected-works-of-voltairine-de-cleyre/index.html",
-    "revision": "626fbd81230c5f672604f9758afa17d70559deed"
-  },
-  {
     "url": "/literature/system-of-economical-contradictions-or-the-philosophy-of-misery/index.html",
     "revision": "78c74cdb9163835e3d0836e8526276d697a021b5"
-  },
-  {
-    "url": "/literature/system-of-economical-contradictions-or-the-philosophy-of-misery/index.html",
-    "revision": "78c74cdb9163835e3d0836e8526276d697a021b5"
-  },
-  {
-    "url": "/literature/the-conquest-of-bread/index.html",
-    "revision": "cd89bdf1bbb2ce789dab9ef0798af4dd74291593"
   },
   {
     "url": "/literature/the-conquest-of-bread/index.html",
@@ -392,14 +204,6 @@
     "revision": "d7d2a57e4d40eaf20d75b5d7dd7316d310ff38a1"
   },
   {
-    "url": "/literature/the-kingdom-of-god-is-within-you/index.html",
-    "revision": "d7d2a57e4d40eaf20d75b5d7dd7316d310ff38a1"
-  },
-  {
-    "url": "/literature/the-place-of-anarchism-in-socialistic-evolution/index.html",
-    "revision": "cf7ef9357cef1e2493e7475ce056f176ecba308e"
-  },
-  {
     "url": "/literature/the-place-of-anarchism-in-socialistic-evolution/index.html",
     "revision": "cf7ef9357cef1e2493e7475ce056f176ecba308e"
   },
@@ -408,20 +212,8 @@
     "revision": "4cd0cbe10e5365e2502fa2a882217ec03a230edb"
   },
   {
-    "url": "/literature/the-right-to-ignore-the-state/index.html",
-    "revision": "4cd0cbe10e5365e2502fa2a882217ec03a230edb"
-  },
-  {
     "url": "/literature/the-rise-and-fall-of-anarchy-in-america/index.html",
     "revision": "b8e2fd3c4d424143fad21f1d6a038e95e240da6b"
-  },
-  {
-    "url": "/literature/the-rise-and-fall-of-anarchy-in-america/index.html",
-    "revision": "b8e2fd3c4d424143fad21f1d6a038e95e240da6b"
-  },
-  {
-    "url": "/literature/what-is-property-an-inquiry-into-the-principle-of-right-and-of-government/index.html",
-    "revision": "0459c7add8d2bcc27af2715d441c44e4c520397d"
   },
   {
     "url": "/literature/what-is-property-an-inquiry-into-the-principle-of-right-and-of-government/index.html",
@@ -433,7 +225,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "fd92d5a4f3b26e3f625ff9644e111a896727912f"
+    "revision": "4aba934912baef3c7e026168e17fbe1efc70e8c8"
   },
   {
     "url": "/sw-register.js",
@@ -442,113 +234,5 @@
   {
     "url": "/sw.js",
     "revision": "f09a339d5e1079f2f9b24151e2e8ced96a0773a8"
-  },
-  {
-    "url": "/text/pg20715.txt",
-    "revision": "af5ff1a3cca251975405de9d398d1f75e505263e"
-  },
-  {
-    "url": "/text/pg2162.txt",
-    "revision": "1881a8ed998b66835ec1511d0ea79080d00bd5e8"
-  },
-  {
-    "url": "/text/pg23428.txt",
-    "revision": "5f230ee71a427533dd8b6cb0f65acdc322d4afd1"
-  },
-  {
-    "url": "/text/pg25285.txt",
-    "revision": "d98f91488c39070fb1cd54f6d3c2a7496a32a0c3"
-  },
-  {
-    "url": "/text/pg26600.txt",
-    "revision": "b55d93faba67af9f4358a0a76092c9844aafe6ed"
-  },
-  {
-    "url": "/text/pg26719.txt",
-    "revision": "775440ed73aaeada8229c13aba6eeb54cdc53a06"
-  },
-  {
-    "url": "/text/pg27118.txt",
-    "revision": "ab35b422acf7625c3497cafb29ff4d5f356ceeef"
-  },
-  {
-    "url": "/text/pg27262.txt",
-    "revision": "8f9260623c369461f7bb9c17255acf1fe96a257c"
-  },
-  {
-    "url": "/text/pg27341.txt",
-    "revision": "f9c40f842b3f1f7c2c672824122242fbdddf8cea"
-  },
-  {
-    "url": "/text/pg31104.txt",
-    "revision": "859ff760118dce28c035d5778fbcba88a05e7cd7"
-  },
-  {
-    "url": "/text/pg33628.txt",
-    "revision": "e63e6521481eedd57f54e111671d646ffcdb0522"
-  },
-  {
-    "url": "/text/pg34406.txt",
-    "revision": "171889e2a0508637cd78bfc952c5e7680f385168"
-  },
-  {
-    "url": "/text/pg34649.txt",
-    "revision": "e02ba8361355cebe6c1816a7f2a32d3dd2a2a3f2"
-  },
-  {
-    "url": "/text/pg360.txt",
-    "revision": "1beffe2f6d8ce27c43eb047050fb730252cb89b2"
-  },
-  {
-    "url": "/text/pg36568.txt",
-    "revision": "d10c31b6295122f8173e0b12cb8d2112724e152a"
-  },
-  {
-    "url": "/text/pg36690.txt",
-    "revision": "497ce3e12112f024ca44274fc2d86c4b83e71f3b"
-  },
-  {
-    "url": "/text/pg40365.txt",
-    "revision": "cd34a0502f6a9845c32001ef7faf6d17e5c4ecf7"
-  },
-  {
-    "url": "/text/pg43098.txt",
-    "revision": "8810bdb01883553a09eb7118cb5092d96eb94fa7"
-  },
-  {
-    "url": "/text/pg4341.txt",
-    "revision": "b37c84050ab0c14b90fa598fee7b424307017eb9"
-  },
-  {
-    "url": "/text/pg444.txt",
-    "revision": "aace5dfd6b638708ff090d85ada0c14bd8e5f26a"
-  },
-  {
-    "url": "/text/pg4602.txt",
-    "revision": "09a97e039c366a6f4ba5b6343e71ced95da21081"
-  },
-  {
-    "url": "/text/pg48292.txt",
-    "revision": "c65ba60ed3a927f6f33b94da34d95eebd892ec53"
-  },
-  {
-    "url": "/text/pg49842.txt",
-    "revision": "f622176676130252262232bbf97b6b6418491565"
-  },
-  {
-    "url": "/text/pg63362.txt",
-    "revision": "3a31cc9862289aa5b4bd1999c97fd2f6972e55dd"
-  },
-  {
-    "url": "/text/pg66501.txt",
-    "revision": "e7d3ea32c9ff18ed74d8dae4e22f2e797c114094"
-  },
-  {
-    "url": "/text/pg66938.txt",
-    "revision": "be6d6a19688984c1aded04e4ae2f7358c5e260d2"
-  },
-  {
-    "url": "/text/pg68442.txt",
-    "revision": "70629afe7fcae2f02ec5c657c4a0708d506b0c16"
   }
 ]
