@@ -43,6 +43,7 @@ name = "antinazi-literature"
 compatibility_date = "2026-08-20"
 pages_build_output_dir = "./public"
 2. Create public/_headers with MIME type rules:
+   
 /*
   Content-Type: text/html; charset=utf-8
 
