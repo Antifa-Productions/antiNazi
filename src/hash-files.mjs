@@ -6,7 +6,7 @@ const PUBLIC_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(PUBLIC_DIR, 'precache-manifest.json');
 
 const PATHS = [
-  '',           // Root of public/ — captures *.png, *.svg, *.ico, etc.
+  '',           // Root of public/ — captures *.png, *.svg, *.ico, etc. (non-recursive)
   'Archive',
   'css',
   'js',
@@ -27,7 +27,13 @@ const SKIP_ROOT_FILES = new Set([
   'CNAME',
 ]);
 
-async function walkDir(dir) {
+/**
+ * Walk a directory and collect all file paths.
+ * @param {string} dir - Absolute directory path.
+ * @param {boolean} recurse - Whether to descend into subdirectories.
+ * @returns {Promise<string[]>} Array of absolute file paths.
+ */
+async function walkDir(dir, recurse = true) {
   const results = [];
   let entries;
   try {
@@ -38,8 +44,8 @@ async function walkDir(dir) {
 
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
-    if (entry.isDirectory()) {
-      results.push(...await walkDir(fullPath));
+    if (entry.isDirectory() && recurse) {
+      results.push(...await walkDir(fullPath, true));
     } else if (entry.isFile()) {
       const ext = '.' + entry.name.split('.').pop().toLowerCase();
       if (!SKIP_EXTENSIONS.has(ext)) {
@@ -63,9 +69,12 @@ async function sha1File(filePath) {
     for (const subPath of PATHS) {
       const absPath = subPath === '' ? PUBLIC_DIR : join(PUBLIC_DIR, subPath);
       const label = subPath === '' ? '(root)' : subPath;
+      // Only recurse into explicitly listed subdirectories, not the root scan
+      const shouldRecurse = subPath !== ''; 
+      
       console.log(`Scanning: ${label}/`);
       
-      const files = await walkDir(absPath);
+      const files = await walkDir(absPath, shouldRecurse);
 
       for (const file of files) {
         const rel = relative(PUBLIC_DIR, file).split(sep).join('/');
