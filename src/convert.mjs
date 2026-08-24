@@ -93,11 +93,11 @@ async function parseTextFile(filePath) {
         currentChapter = {
           heading: 'Introduction',
           id: 'introduction',
-          paragraphs: [],
+          subsections: [],
         };
         chapters.push(currentChapter);
       }
-      currentChapter.paragraphs.push(paraText);
+      currentChapter.subsections.push({ type: 'paragraph', content: paraText });
     }
     currentParagraph = [];
   }
@@ -105,7 +105,7 @@ async function parseTextFile(filePath) {
   function startChapter(heading) {
     flushParagraph();
     const id = slugify(heading) || `section-${chapters.length + 1}`;
-    currentChapter = { heading, id, paragraphs: [] };
+    currentChapter = { heading, id, subsections: [] };
     chapters.push(currentChapter);
   }
 
@@ -124,9 +124,10 @@ async function parseTextFile(filePath) {
 
     if (isCapsHeading(trimmed) && currentParagraph.length === 0) {
       flushParagraph();
-      const id = slugify(trimmed) || `subsection-${chapters.length}-${currentChapter ? currentChapter.paragraphs.length : 0}`;
+      const id = slugify(trimmed) || `subsection-${chapters.length}-${currentChapter ? currentChapter.subsections.length : 0}`;
       if (currentChapter) {
-        currentChapter.paragraphs.push(`<h3 id="${id}">${escapeHtml(trimmed)}</h3>`);
+        // Store as heading object, NOT as escaped HTML string
+        currentChapter.subsections.push({ type: 'heading', id, content: trimmed });
       } else {
         startChapter(trimmed);
       }
@@ -137,15 +138,29 @@ async function parseTextFile(filePath) {
   }
   flushParagraph();
 
+  // Flatten all subsections for footnote extraction
   const allParagraphs = [];
   for (const ch of chapters) {
-    allParagraphs.push(...ch.paragraphs);
+    for (const sub of ch.subsections) {
+      if (sub.type === 'paragraph') {
+        allParagraphs.push(sub.content);
+      }
+    }
   }
   const { footnotes } = extractFootnotes(allParagraphs);
 
+  // Process footnotes for each chapter's paragraphs
   for (const ch of chapters) {
-    const { paragraphs } = extractFootnotes(ch.paragraphs);
-    ch.paragraphs = paragraphs;
+    const processed = [];
+    for (const sub of ch.subsections) {
+      if (sub.type === 'paragraph') {
+        const { paragraphs } = extractFootnotes([sub.content]);
+        processed.push({ ...sub, content: paragraphs[0] || sub.content });
+      } else {
+        processed.push(sub);
+      }
+    }
+    ch.subsections = processed;
   }
 
   const seenFn = new Set();
@@ -171,13 +186,11 @@ async function convertFile(inputPath) {
   console.log(`Converting: ${inputPath}`);
   const book = await parseTextFile(inputPath);
 
-  // NEW: Create book-specific subdirectory instead of flat file
   const outputDir = join(OUTPUT_DIR, book.fileName);
   if (!existsSync(outputDir)) {
     await mkdir(outputDir, { recursive: true });
   }
 
-  // NEW: Write index.html inside the subdirectory
   const outputFile = join(outputDir, 'index.html');
   const html = buildHtml(book);
   await writeFile(outputFile, html, 'utf-8');
