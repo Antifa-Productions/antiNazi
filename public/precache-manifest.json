@@ -20,10 +20,6 @@
     "revision": "b21eb6621a0c80cd81fd19ef0a1d96e5abe7bb5a"
   },
   {
-    "url": "/favicon.png",
-    "revision": "e9923af44de5a3297586cef33148c46b635dbf80"
-  },
-  {
     "url": "/favicon.svg",
     "revision": "7b8cadb4ef0cc7ec02fdc63a558fa262bf4d4db8"
   },
@@ -253,7 +249,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "d7f275f4a9996075178ee90cceb6afac8402c8c6"
+    "revision": "19f78a679e8d43ca647c38e8d63e5a3af1907914"
   },
   {
     "url": "/sw-register.js",
