@@ -28,6 +28,62 @@
     "revision": "7b8cadb4ef0cc7ec02fdc63a558fa262bf4d4db8"
   },
   {
+    "url": "/images/png/apple-touch-icon-180x180.png",
+    "revision": "a5231afb78f2075a67ac359c342a9220de3bd36b"
+  },
+  {
+    "url": "/images/png/favicon-dark.png",
+    "revision": "ae44277bd21d1b56afe728d200d1246ec40d2d83"
+  },
+  {
+    "url": "/images/png/favicon-light.png",
+    "revision": "0622a102eca8bf83fea9055b2ba758e7353582e0"
+  },
+  {
+    "url": "/images/png/icon-dark-192x192-maskable.png",
+    "revision": "40df4d292a3d7fd44a3263b65f990260fc51513a"
+  },
+  {
+    "url": "/images/png/icon-dark-192x192.png",
+    "revision": "40df4d292a3d7fd44a3263b65f990260fc51513a"
+  },
+  {
+    "url": "/images/png/icon-dark-384x384.png",
+    "revision": "5364980f54732abadb18b1445cde504dea58a1ec"
+  },
+  {
+    "url": "/images/png/icon-dark-512x512-maskable.png",
+    "revision": "ae44277bd21d1b56afe728d200d1246ec40d2d83"
+  },
+  {
+    "url": "/images/png/icon-dark-512x512.png",
+    "revision": "ae44277bd21d1b56afe728d200d1246ec40d2d83"
+  },
+  {
+    "url": "/images/png/icon-light-192x192-maskable.png",
+    "revision": "0af0850d02a2dce9da10c0dcae08f397838ac9e5"
+  },
+  {
+    "url": "/images/png/icon-light-192x192.png",
+    "revision": "0af0850d02a2dce9da10c0dcae08f397838ac9e5"
+  },
+  {
+    "url": "/images/png/icon-light-384x384.png",
+    "revision": "e585dd4a4b34ace01706e5a6f7619c7776c0fced"
+  },
+  {
+    "url": "/images/png/icon-light-512x512-maskable.png",
+    "revision": "0622a102eca8bf83fea9055b2ba758e7353582e0"
+  },
+  {
+    "url": "/images/png/icon-light-512x512.png",
+    "revision": "0622a102eca8bf83fea9055b2ba758e7353582e0"
+  },
+  {
+    "url": "/images/png/og_social.png",
+    "revision": "cbc710a5ce4de98351ed3bb7f389aceca57f4c76"
+  },
+  {
     "url": "/index.html",
     "revision": "67b74d14f678f0c9bd4623a0a32a2a06260e81dd"
   },
@@ -189,7 +245,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "d8b5917963c91de73848f0d09353b6b02e93066c"
+    "revision": "0fa7321147e7ffe09f422b20c90a2423e2c940f1"
   },
   {
     "url": "/sw-register.js",
