@@ -4,6 +4,22 @@
     "revision": "6b380ffebdf98f84be13abe651e6a40a31f68c39"
   },
   {
+    "url": "/favicon-dark.png",
+    "revision": "ae44277bd21d1b56afe728d200d1246ec40d2d83"
+  },
+  {
+    "url": "/favicon-dark.svg",
+    "revision": "cd728688f92eb4639f6551a4feabc5180c96a419"
+  },
+  {
+    "url": "/favicon-light.png",
+    "revision": "0622a102eca8bf83fea9055b2ba758e7353582e0"
+  },
+  {
+    "url": "/favicon-light.svg",
+    "revision": "b21eb6621a0c80cd81fd19ef0a1d96e5abe7bb5a"
+  },
+  {
     "url": "/favicon.png",
     "revision": "e9923af44de5a3297586cef33148c46b635dbf80"
   },
@@ -225,7 +241,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "4aba934912baef3c7e026168e17fbe1efc70e8c8"
+    "revision": "6b8aed4422071846bfb7495c1cf6d61de25da2e8"
   },
   {
     "url": "/sw-register.js",
