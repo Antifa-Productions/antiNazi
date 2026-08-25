@@ -84,6 +84,14 @@
     "revision": "cbc710a5ce4de98351ed3bb7f389aceca57f4c76"
   },
   {
+    "url": "/images/svg/favicon-dark.svg",
+    "revision": "cd728688f92eb4639f6551a4feabc5180c96a419"
+  },
+  {
+    "url": "/images/svg/favicon-light.svg",
+    "revision": "b21eb6621a0c80cd81fd19ef0a1d96e5abe7bb5a"
+  },
+  {
     "url": "/index.html",
     "revision": "67b74d14f678f0c9bd4623a0a32a2a06260e81dd"
   },
@@ -245,7 +253,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "0fa7321147e7ffe09f422b20c90a2423e2c940f1"
+    "revision": "d7f275f4a9996075178ee90cceb6afac8402c8c6"
   },
   {
     "url": "/sw-register.js",
