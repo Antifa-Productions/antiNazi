@@ -126,7 +126,6 @@ async function parseTextFile(filePath) {
       flushParagraph();
       const id = slugify(trimmed) || `subsection-${chapters.length}-${currentChapter ? currentChapter.subsections.length : 0}`;
       if (currentChapter) {
-        // Store as heading object, NOT as escaped HTML string
         currentChapter.subsections.push({ type: 'heading', id, content: trimmed });
       } else {
         startChapter(trimmed);
@@ -138,7 +137,6 @@ async function parseTextFile(filePath) {
   }
   flushParagraph();
 
-  // Flatten all subsections for footnote extraction
   const allParagraphs = [];
   for (const ch of chapters) {
     for (const sub of ch.subsections) {
@@ -149,7 +147,6 @@ async function parseTextFile(filePath) {
   }
   const { footnotes } = extractFootnotes(allParagraphs);
 
-  // Process footnotes for each chapter's paragraphs
   for (const ch of chapters) {
     const processed = [];
     for (const sub of ch.subsections) {
@@ -191,8 +188,9 @@ async function convertFile(inputPath) {
     await mkdir(outputDir, { recursive: true });
   }
 
+  const siteUrl = process.env.SITE_URL || 'https://dev.antinazi.org';
   const outputFile = join(outputDir, 'index.html');
-  const html = buildHtml(book);
+  const html = buildHtml(book, '/css/style.css', siteUrl);
   await writeFile(outputFile, html, 'utf-8');
   console.log(`  → Written: ${outputFile}`);
 }
