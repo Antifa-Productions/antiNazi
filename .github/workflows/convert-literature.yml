@@ -32,6 +32,8 @@ jobs:
           if [ -f package.json ]; then npm ci || true; fi
 
       - name: Convert literature
+        env:
+          SITE_URL: 'https://dev.antinazi.org'
         run: node src/convert.mjs --all
 
       - name: Build literature index
