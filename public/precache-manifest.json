@@ -20,10 +20,6 @@
     "revision": "b21eb6621a0c80cd81fd19ef0a1d96e5abe7bb5a"
   },
   {
-    "url": "/favicon.svg",
-    "revision": "7b8cadb4ef0cc7ec02fdc63a558fa262bf4d4db8"
-  },
-  {
     "url": "/images/png/apple-touch-icon-180x180.png",
     "revision": "a5231afb78f2075a67ac359c342a9220de3bd36b"
   },
@@ -249,7 +245,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "19f78a679e8d43ca647c38e8d63e5a3af1907914"
+    "revision": "5465d541338c096e008fe901024be732c9276718"
   },
   {
     "url": "/sw-register.js",
