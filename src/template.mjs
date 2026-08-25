@@ -1,51 +1,56 @@
-import { escapeHtml } from './utils.mjs';
+import {
+    escapeHtml
+} from './utils.mjs';
 
 export function buildHtml(book, cssPath = '/css/style.css') {
-  const lang = book.language || 'en';
-  const datePublished = book.datePublished || '';
-  const description = book.description || '';
+    const lang = book.language || 'en';
+    const datePublished = book.datePublished || '';
+    const description = book.description || '';
 
-  // Render chapters with proper heading/paragraph distinction
-  const chaptersHtml = book.chapters.map(ch => {
-    const subsectionsHtml = ch.subsections.map(sub => {
-      if (sub.type === 'heading') {
-        return `      <h3 id="${sub.id}">${escapeHtml(sub.content)}</h3>`;
-      }
-      // Paragraph
-      return `      <p>${sub.content}</p>`;
-    }).join('\n');
+    // Render chapters with proper heading/paragraph distinction
+    const chaptersHtml = book.chapters.map(ch => {
+        const subsectionsHtml = ch.subsections.map(sub => {
+            if (sub.type === 'heading') {
+                return `      <h3 id="${sub.id}">${escapeHtml(sub.content)}</h3>`;
+            }
+            // Paragraph
+            return `      <p>${sub.content}</p>`;
+        }).join('\n');
 
-    return `    <section aria-labelledby="${ch.id}">
+        return `    <section aria-labelledby="${ch.id}">
       <h2 id="${ch.id}">${escapeHtml(ch.heading)}</h2>
 ${subsectionsHtml}
     </section>`;
-  }).join('\n');
+    }).join('\n');
 
-  let footnotesHtml = '';
-  if (book.footnotes && book.footnotes.length > 0) {
-    const items = book.footnotes.map(fn =>
-      `      <li id="${fn.id}"><a href="#ref-${fn.num}" aria-label="Back to reference ${fn.num}">↩</a> ${fn.text}</li>`
-    ).join('\n');
-    footnotesHtml = `
+    let footnotesHtml = '';
+    if (book.footnotes && book.footnotes.length > 0) {
+        const items = book.footnotes.map(fn =>
+            `      <li id="${fn.id}"><a href="#ref-${fn.num}" aria-label="Back to reference ${fn.num}">↩</a> ${fn.text}</li>`
+        ).join('\n');
+        footnotesHtml = `
     <section aria-labelledby="footnotes-heading">
       <h2 id="footnotes-heading">Footnotes</h2>
       <ol class="footnotes">
 ${items}
       </ol>
     </section>`;
-  }
+    }
 
-  const schemaLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Book',
-    name: book.title,
-    author: { '@type': 'Person', name: book.author },
-    inLanguage: lang,
-  };
-  if (datePublished) schemaLd.datePublished = datePublished;
-  if (description) schemaLd.description = description;
+    const schemaLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Book',
+        name: book.title,
+        author: {
+            '@type': 'Person',
+            name: book.author
+        },
+        inLanguage: lang,
+    };
+    if (datePublished) schemaLd.datePublished = datePublished;
+    if (description) schemaLd.description = description;
 
-  return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
   <meta charset="utf-8">
@@ -63,6 +68,11 @@ ${items}
   <script type="application/ld+json">
 ${JSON.stringify(schemaLd, null, 2)}
   </script>
+  <link rel="icon" href="/images/svg/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/images/svg/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/images/png/apple-touch-icon-180x180.png" sizes="180x180">
+<meta property="og:image" content="https://dev.antinazi.org/images/png/og_social.png">
+<meta name="twitter:image" content="https://dev.antinazi.org/images/png/og_social.png">
   <script src="/sw-register.js" defer></script>
   <script>window.__BOOK_SLUG__ = '${escapeHtml(book.fileName)}';</script>
   <script src="/js/reader.js" defer></script>
