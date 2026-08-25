@@ -28,50 +28,6 @@
     "revision": "7b8cadb4ef0cc7ec02fdc63a558fa262bf4d4db8"
   },
   {
-    "url": "/images/png/apple-touch-icon-180x180.png",
-    "revision": "e8bc8eace7213f4ee0fe16e6202a8cdab061648b"
-  },
-  {
-    "url": "/images/png/favicon-96x96.png",
-    "revision": "d264de4cd0d66c6b7bf59cfd50808d5da5153dc8"
-  },
-  {
-    "url": "/images/png/icon-128x128.png",
-    "revision": "5e23ee0da07c7820a63553b545ba1e6190e1ccd4"
-  },
-  {
-    "url": "/images/png/icon-144x144.png",
-    "revision": "ff6b0553537fae93b5900f4832b873ac70b81a86"
-  },
-  {
-    "url": "/images/png/icon-152x152.png",
-    "revision": "0e4dd665f6aff5bebc4db6d227c3db0da61b3bee"
-  },
-  {
-    "url": "/images/png/icon-180x180.png",
-    "revision": "a7a1d37680a38b2bee3c64f95d08ec485015cecb"
-  },
-  {
-    "url": "/images/png/icon-192x192-maskable.png",
-    "revision": "1825a1a06ecf08a3ed4793f59a17b343cb727b5f"
-  },
-  {
-    "url": "/images/png/icon-192x192.png",
-    "revision": "0f491dc6c08a62236d4ea2d9c243082582405f71"
-  },
-  {
-    "url": "/images/png/icon-384x384.png",
-    "revision": "28d857cea3019d20fb9fb3a8acc100d6ecb89a6a"
-  },
-  {
-    "url": "/images/png/icon-512x512-maskable.png",
-    "revision": "a880ac9dcd1a6c9b6b71636fafd765110abde419"
-  },
-  {
-    "url": "/images/png/icon-512x512.png",
-    "revision": "c03a881acc936c21073c61f0057f70bcb1161ddc"
-  },
-  {
     "url": "/index.html",
     "revision": "67b74d14f678f0c9bd4623a0a32a2a06260e81dd"
   },
@@ -233,7 +189,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "c7c8766884de264274865d40a836a7a416edd9f6"
+    "revision": "f44dd6defe3b222c79ddfca473e8b7c638ed8986"
   },
   {
     "url": "/sw-register.js",
