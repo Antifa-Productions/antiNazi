@@ -1,11 +1,10 @@
-import {
-    escapeHtml
-} from './utils.mjs';
-
-export function buildHtml(book, cssPath = '/css/style.css') {
+export function buildHtml(book, cssPath = '/css/style.css', siteUrl = 'https://dev.antinazi.org') {
     const lang = book.language || 'en';
     const datePublished = book.datePublished || '';
     const description = book.description || '';
+    const canonicalUrl = `${siteUrl}/literature/${book.fileName}/`;
+    const ogImage = `${siteUrl}/images/png/og_social.png`;
+    const ogDescription = escapeHtml(description || `${book.title} by ${book.author}`);
 
     // Render chapters with proper heading/paragraph distinction
     const chaptersHtml = book.chapters.map(ch => {
@@ -13,7 +12,6 @@ export function buildHtml(book, cssPath = '/css/style.css') {
             if (sub.type === 'heading') {
                 return `      <h3 id="${sub.id}">${escapeHtml(sub.content)}</h3>`;
             }
-            // Paragraph
             return `      <p>${sub.content}</p>`;
         }).join('\n');
 
@@ -46,9 +44,20 @@ ${items}
             name: book.author
         },
         inLanguage: lang,
+        url: canonicalUrl,
     };
     if (datePublished) schemaLd.datePublished = datePublished;
     if (description) schemaLd.description = description;
+
+    const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+            { '@type': 'ListItem', position: 2, name: 'Library', item: `${siteUrl}/library/` },
+            { '@type': 'ListItem', position: 3, name: book.title, item: canonicalUrl }
+        ]
+    };
 
     return `<!DOCTYPE html>
 <html lang="${lang}">
@@ -58,21 +67,52 @@ ${items}
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#54428e" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#181424" media="(prefers-color-scheme: dark)">
-  <meta name="description" content="${escapeHtml(description || `${book.title} by ${book.author}`)}">
+  <meta name="description" content="${ogDescription}">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Literature">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/images/svg/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/images/svg/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/images/png/apple-touch-icon-180x180.png" sizes="180x180">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="${escapeHtml(book.title)}">
+  <meta property="og:description" content="${ogDescription}">
   <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:locale" content="${lang}">
+  <meta property="og:site_name" content="Antinazi Literature Library">
+  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${escapeHtml(book.title)} — ${escapeHtml(book.author)}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(book.title)}">
+  <meta name="twitter:description" content="${ogDescription}">
+  <meta name="twitter:image" content="${ogImage}">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="${canonicalUrl}">
+
   <link rel="stylesheet" href="${cssPath}">
   <link rel="manifest" href="/manifest.webmanifest">
   <title>${escapeHtml(book.title)} — ${escapeHtml(book.author)}</title>
+
   <script type="application/ld+json">
 ${JSON.stringify(schemaLd, null, 2)}
   </script>
-  <link rel="icon" href="/images/svg/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
-<link rel="icon" href="/images/svg/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
-<link rel="apple-touch-icon" href="/images/png/apple-touch-icon-180x180.png" sizes="180x180">
-<meta property="og:image" content="https://dev.antinazi.org/images/png/og_social.png">
-<meta name="twitter:image" content="https://dev.antinazi.org/images/png/og_social.png">
+  <script type="application/ld+json">
+${JSON.stringify(breadcrumbSchema, null, 2)}
+  </script>
+
   <script src="/sw-register.js" defer></script>
   <script>window.__BOOK_SLUG__ = '${escapeHtml(book.fileName)}';</script>
   <script src="/js/reader.js" defer></script>
