@@ -28,14 +28,6 @@
     "revision": "7b8cadb4ef0cc7ec02fdc63a558fa262bf4d4db8"
   },
   {
-    "url": "/images/png/antiNazi.org_1200x630.png",
-    "revision": "a3b5c4db6af7f5026ca6c94fe07aed2ebfe67d82"
-  },
-  {
-    "url": "/images/png/apple-touch-icon-120x120.png",
-    "revision": "bc48bdbc71529cfcc32c32d5e606e100cbaf3a36"
-  },
-  {
     "url": "/images/png/apple-touch-icon-180x180.png",
     "revision": "e8bc8eace7213f4ee0fe16e6202a8cdab061648b"
   },
@@ -241,7 +233,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "6b8aed4422071846bfb7495c1cf6d61de25da2e8"
+    "revision": "c7c8766884de264274865d40a836a7a416edd9f6"
   },
   {
     "url": "/sw-register.js",
