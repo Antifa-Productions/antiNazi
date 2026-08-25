@@ -1,3 +1,5 @@
+import { escapeHtml } from './utils.mjs';
+
 export function buildHtml(book, cssPath = '/css/style.css', siteUrl = 'https://dev.antinazi.org') {
     const lang = book.language || 'en';
     const datePublished = book.datePublished || '';
