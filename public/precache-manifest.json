@@ -85,7 +85,7 @@
   },
   {
     "url": "/index.html",
-    "revision": "67b74d14f678f0c9bd4623a0a32a2a06260e81dd"
+    "revision": "ebeb1a57de959118c2e1dbd4e7fc9a592cd88010"
   },
   {
     "url": "/js/app.js",
@@ -245,7 +245,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "606ead90429fdc4c573edb589aa987807c72ffe3"
+    "revision": "6e2cacfb9145bc28147d8b407a46893f8eac1201"
   },
   {
     "url": "/sw-register.js",
