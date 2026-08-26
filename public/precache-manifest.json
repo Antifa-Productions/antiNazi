@@ -173,7 +173,7 @@
   },
   {
     "url": "/literature/index.json",
-    "revision": "dccccdae128b6279dab43b66496ce1a34137599e"
+    "revision": "34698627abb247f762e71ba8fd61260a99f113b7"
   },
   {
     "url": "/literature/marriage-and-love/index.html",
@@ -236,6 +236,10 @@
     "revision": "6aa0dcda95572f4718691cfe23b1b26e01b74cd4"
   },
   {
+    "url": "/literature/walden-and-on-the-duty-of-civil-disobedience/index.html",
+    "revision": "c762b1d00fa627cd15316c29435985fa6b2448ca"
+  },
+  {
     "url": "/literature/what-is-property-an-inquiry-into-the-principle-of-right-and-of-government/index.html",
     "revision": "a6669e88a83d8512e0d9c12f856b805783458527"
   },
@@ -245,7 +249,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "476c59f59f473fdd25c0e541ad441e74cde2219b"
+    "revision": "3f31f859273b949a38d15d9335fcdd48bcd2c224"
   },
   {
     "url": "/sw-register.js",
