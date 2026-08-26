@@ -158,3 +158,116 @@ ${footnotesHtml}
 </html>
 `;
 }
+
+export function buildHomepageHtml(siteUrl = 'https://dev.antinazi.org', cssPath = '/css/style.css') {
+    const title = 'Antinazi Literature Library';
+    const description = 'Public-domain anarchist and radical literature, accessible and offline-ready.';
+    const canonicalUrl = `${siteUrl}/`;
+    const ogImage = `${siteUrl}/images/png/og_social.png`;
+
+    const schemaLd = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: title,
+        url: canonicalUrl,
+        description: description,
+    };
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#54428e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181424" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="${escapeHtml(description)}">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Antinazi">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/images/svg/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/images/svg/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/images/png/apple-touch-icon-180x180.png" sizes="180x180">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="${escapeHtml(title)}">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:locale" content="en">
+  <meta property="og:site_name" content="Antinazi Literature Library">
+  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${escapeHtml(title)}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${ogImage}">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <link rel="stylesheet" href="${cssPath}">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <title>${escapeHtml(title)}</title>
+
+  <script type="application/ld+json">
+${JSON.stringify(schemaLd, null, 2)}
+  </script>
+
+  <script src="/sw-register.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header>
+    <nav aria-label="Main">
+      <ul class="breadcrumbs">
+        <li aria-current="page">🏠 Home</li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main-content">
+    <article>
+      <header>
+        <h1>${escapeHtml(title)}</h1>
+        <p class="byline">Defending truth through literature.</p>
+      </header>
+      <section aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p>This library hosts public-domain anarchist and radical literature, converted into accessible HTML5 documents with offline capability via Progressive Web App technology.</p>
+      </section>
+      <section aria-labelledby="catalog-heading">
+        <h2 id="catalog-heading">Catalogue</h2>
+        <div id="literature-list">
+          <p>Literature listings will appear here.</p>
+        </div>
+      </section>
+    </article>
+  </main>
+  <footer>
+    <hr>
+    <p class="site-tagline">Defending truth through literature.</p>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/About">About</a></li>
+        <li><a href="/Privacy-Policy">Privacy Policy</a></li>
+        <li><a href="/Accessibility-Statement">Accessibility Statement</a></li>
+        <li><a href="/Terms-of-Service">Terms of Service</a></li>
+        <li><a href="/Gutenberg-License">Project Gutenberg License</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>
+`;
+}
