@@ -79,7 +79,7 @@ ${items}
   <meta name="apple-mobile-web-app-title" content="Literature">
 
   <!-- Favicons -->
-  <link rel="icon" href="/images/svg/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/images/svg/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/images/svg/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
   <link rel="apple-touch-icon" href="/images/png/apple-touch-icon-180x180.png" sizes="180x180">
 
@@ -191,7 +191,7 @@ export function buildHomepageHtml(siteUrl = 'https://dev.antinazi.org', cssPath 
   <meta name="apple-mobile-web-app-title" content="Antinazi">
 
   <!-- Favicons -->
-  <link rel="icon" href="/images/svg/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/images/svg/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/images/svg/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
   <link rel="apple-touch-icon" href="/images/png/apple-touch-icon-180x180.png" sizes="180x180">
 
