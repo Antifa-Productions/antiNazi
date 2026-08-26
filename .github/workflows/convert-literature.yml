@@ -39,11 +39,17 @@ jobs:
       - name: Build literature index
         run: node src/build-index.mjs
 
+      - name: Build homepage
+        env:
+          SITE_URL: 'https://dev.antinazi.org'
+        run: node src/build-homepage.mjs
+
       - name: Commit converted files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/literature/
+          git add public/index.html
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
