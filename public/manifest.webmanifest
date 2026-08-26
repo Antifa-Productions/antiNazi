@@ -60,13 +60,13 @@
       "src": "/images/svg/favicon-dark.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
       "src": "/images/svg/favicon-light.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "maskable"
+      "purpose": "any"
     }
   ],
   "dir": "ltr",
