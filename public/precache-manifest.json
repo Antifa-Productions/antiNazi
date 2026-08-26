@@ -245,11 +245,11 @@
   },
   {
     "url": "/manifest.webmanifest",
-    "revision": "5a09ec50d948a4257c4a441e7eba9bf56f518291"
+    "revision": "d9070358f135e8826491e41ee7f040ad1c9fd713"
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "83eee7897c995878a1c9ea72b2c8f2fda5796e13"
+    "revision": "ecb8ee42a870cb7e7dd5976f2c66ade350dc4d61"
   },
   {
     "url": "/sw-register.js",
