@@ -181,7 +181,7 @@
   },
   {
     "url": "/literature/index.json",
-    "revision": "bcf5baef9794bd2477ad3ac3794d27d09a4ef06c"
+    "revision": "93ee6c67a4de3aa16295b3bdb62dd396320d622a"
   },
   {
     "url": "/literature/manifesto-of-the-communist-party/index.html",
@@ -210,6 +210,14 @@
   {
     "url": "/literature/mutual-aid-a-factor-of-evolution/index.html",
     "revision": "3544f11adf097c6e1b78b10badee6bc455d1e744"
+  },
+  {
+    "url": "/literature/my-disillusionment-in-russia/index.html",
+    "revision": "c7dec4e6f03dff77d4c77994b8890f2b36719789"
+  },
+  {
+    "url": "/literature/my-further-disillusionment-in-russia/index.html",
+    "revision": "e2cfb94a0844848ac31b35c3d519388f833aff57"
   },
   {
     "url": "/literature/political-ideals/index.html",
@@ -268,6 +276,10 @@
     "revision": "248bceeec1ee370b77562570de0a9e414bb6b6a9"
   },
   {
+    "url": "/literature/the-place-of-the-individual-in-society/index.html",
+    "revision": "15f1c00fb5a03a5ee426830d25348ba58845d2fe"
+  },
+  {
     "url": "/literature/the-right-to-ignore-the-state/index.html",
     "revision": "9e50d32875cf3bbbbe7130bc267ada56ead742e8"
   },
@@ -293,7 +305,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "9991ccf686edeb7ae1e847ddc8a1341d25a45ead"
+    "revision": "3985aae6c875158c51a79324c7c7bc369efc1af3"
   },
   {
     "url": "/sw-register.js",
