@@ -56,6 +56,9 @@ pages_build_output_dir = "./public"
 
 /*.js
   Content-Type: text/javascript; charset=utf-8
+
+/*.mjs
+  Content-Type: text/javascript; charset=utf-8
   
 ### GitHub Actions
 
