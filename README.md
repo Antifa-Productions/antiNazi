@@ -224,3 +224,5 @@ See SECURITY.md for vulnerability reporting.
 **Plain text literature files: Public domain (sourced from Project Gutenberg).**
 
 [![Convert Literature](https://github.com/Antifa-Productions/antiNazi/actions/workflows/convert-literature.yml/badge.svg)](https://github.com/Antifa-Productions/antiNazi/actions/workflows/convert-literature.yml)   [![CodeQL](https://github.com/Antifa-Productions/antiNazi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Antifa-Productions/antiNazi/actions/workflows/github-code-scanning/codeql)
+
+![Mozilla HTTP Observatory Grade](https://img.shields.io/mozilla-observatory/grade-score/dev.antinazi.org) ![Chromium HSTS preload](https://img.shields.io/hsts/preload/antinazi.org) 
