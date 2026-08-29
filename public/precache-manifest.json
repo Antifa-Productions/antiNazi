@@ -181,7 +181,7 @@
   },
   {
     "url": "/literature/index.json",
-    "revision": "93ee6c67a4de3aa16295b3bdb62dd396320d622a"
+    "revision": "38c41f35f5a16e0b759907d00ce6cf7e4d27355e"
   },
   {
     "url": "/literature/manifesto-of-the-communist-party/index.html",
@@ -301,7 +301,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "027fe4352254f34c1dd09f4f9f50618f06fefd86"
+    "revision": "ec03badd72ce2281a0205ba91bd872f8860fb600"
   },
   {
     "url": "/sw-register.js",
