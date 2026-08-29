@@ -38,11 +38,12 @@ antinazi/ ├── .github/workflows/ │ ├── setup-dependencies.yml # Do
 ### Configuration
 
 #### Cloudflare Setup
+
 1. Create wrangler.toml in repo root:
-name = "antinazi-literature"
+name = "antinazi"
 compatibility_date = "2026-08-20"
 pages_build_output_dir = "./public"
-2. Create public/_headers with MIME type rules:
+3. Create public/_headers with MIME type rules:
    
 /*
   Content-Type: text/html; charset=utf-8
