@@ -54,11 +54,26 @@ pages_build_output_dir = "./public"
 /*.css
   Content-Type: text/css; charset=utf-8
 
+/*.pdf
+  Content-Type: application/pdf; charset=utf-8
+
 /*.js
   Content-Type: text/javascript; charset=utf-8
 
 /*.mjs
   Content-Type: text/javascript; charset=utf-8
+
+/*.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+
+/*.svg
+  Content-Type: image/svg+xml
+
+/*.png
+  Content-Type: image/png
+
+/*.xml
+  Content-Type: application/xml; charset=utf-8
   
 ### GitHub Actions
 
