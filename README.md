@@ -132,31 +132,48 @@ Dark mode (same hue families, luminance adjusted for contrast):
 Designed around Project Gutenberg plain-text format:
 
 *** START OF / *** END OF markers strip boilerplate
+
 Title:, Author:, Language:, Release Date: extracted from header
+
 Chapter headings: CHAPTER I, Chapter 1, PART ONE, ACT III
+
 ALL-CAPS lines as subsection headings
 Blank line paragraph separation
+
 _italic_, *italic*, **bold** inline formatting
+
 [1] footnote references with bidirectional links
+
 If Gutenberg markers are absent, converter degrades gracefully — processes entire file as content.
 
 ### Tech Stack
 
 Runtime: Node.js 20+ (ESM, zero dependencies)
+
 CI: GitHub Actions (Ubuntu, Node 20)
+
 PWA: Self-hosted Workbox v7, custom IDB wrapper
+
 CSS: Custom properties, clamp() typography, prefers-color-scheme: dark
-HTML: Semantic HTML5, ARIA, Schema.org JSON-LD
+
+HTML: Semantic HTML5, ARIA, Schema.org
+JSON-LD
+
 Hosting: Cloudflare Pages with wrangler.toml config
+
 Dependencies: Pure Node.js standard library only
 
 ### Security
 
 No unsafe-eval or unsafe-inline in CSP
+
 Zero external runtime dependencies
+
 Input sanitization (all text escaped before rendering)
+
 Same-origin service worker enforcement
 SHA1 content-addressed caching for integrity
+
 See SECURITY.md for vulnerability reporting.
 
 ### License
@@ -164,3 +181,5 @@ See SECURITY.md for vulnerability reporting.
 **Source code: AGPL-3.0-or-later.**
 
 **Plain text literature files: Public domain (sourced from Project Gutenberg).**
+
+[![Convert Literature](https://github.com/Antifa-Productions/antiNazi/actions/workflows/convert-literature.yml/badge.svg)](https://github.com/Antifa-Productions/antiNazi/actions/workflows/convert-literature.yml)   [![CodeQL](https://github.com/Antifa-Productions/antiNazi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Antifa-Productions/antiNazi/actions/workflows/github-code-scanning/codeql)
