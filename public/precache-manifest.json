@@ -260,10 +260,6 @@
     "revision": "7d69a1733e4d79b22307f86156c489f39b5d3907"
   },
   {
-    "url": "/literature/the-communist-manifesto/index.html",
-    "revision": "6c6cadf7938f197f9b00ba9ada420afa4b315e47"
-  },
-  {
     "url": "/literature/the-conquest-of-bread/index.html",
     "revision": "419f36ddd08e5a34b3698263acaa3867db8f1327"
   },
@@ -305,7 +301,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "cfe6f5d2e27ddcb0dcab19cf6bb60ae62aa7f562"
+    "revision": "027fe4352254f34c1dd09f4f9f50618f06fefd86"
   },
   {
     "url": "/sw-register.js",
