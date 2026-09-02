@@ -1,5 +1,5 @@
 {
-  "name": "antinazi",
+  "name": "literature-pwa",
   "version": "1.0.0",
   "description": "Converts plain-text literature into accessible HTML5 and serves as an offline-capable PWA.",
   "type": "module",
