@@ -35,7 +35,7 @@ npm run build            # All of the above
 ## Repository Structure
 
 ```
-antinazi/
+literature-pwa/
 ├── .github/
 │   └── workflows/
 │       ├── setup-dependencies.yml    # Downloads Workbox on push
