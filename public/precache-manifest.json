@@ -181,7 +181,7 @@
   },
   {
     "url": "/literature/index.json",
-    "revision": "2d480cf9476f5597171701116df42e3a614e3c1d"
+    "revision": "883e45a62af8d8ee25d81b93034f5edad94afc0f"
   },
   {
     "url": "/literature/la-jeune-inde/index.html",
@@ -212,6 +212,10 @@
     "revision": "caba0acae70dd183a418eed387945d0b873ec103"
   },
   {
+    "url": "/literature/mussolini-as-revealed-in-his-political-speeches-november-1914-august-1923/index.html",
+    "revision": "0be72a25dac853df107dd265e84e1ca541a8eac5"
+  },
+  {
     "url": "/literature/mutual-aid-a-factor-of-evolution/index.html",
     "revision": "3544f11adf097c6e1b78b10badee6bc455d1e744"
   },
@@ -238,6 +242,10 @@
   {
     "url": "/literature/ravachol-und-die-pariser-anarchisten/index.html",
     "revision": "634a22df4eec3f575e8a081711388e41e3c1b249"
+  },
+  {
+    "url": "/literature/secret-armies/index.html",
+    "revision": "72065d758da895b53bfa64ea1bbc54f6752ec35f"
   },
   {
     "url": "/literature/selected-works-of-voltairine-de-cleyre/index.html",
@@ -305,7 +313,7 @@
   },
   {
     "url": "/precache-manifest.json",
-    "revision": "fa920c3e1f00c090786827f311fec9ddb0fa2bcd"
+    "revision": "64130c897da19fce3c34128df80a29c77f69a360"
   },
   {
     "url": "/sw-register.js",
