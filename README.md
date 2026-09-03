@@ -81,7 +81,7 @@ literature-pwa/
 #### Cloudflare Setup
 
 1. Create wrangler.toml in repo root:
-name = "antinazi"
+name = "literature-pwa"
 compatibility_date = "2026-08-20"
 pages_build_output_dir = "./public"
 3. Create public/_headers with MIME type rules:
